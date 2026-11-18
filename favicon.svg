@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="3" dy="3" stdDeviation="0" flood-color="#1d1d1d"/>
+    </filter>
+  </defs>
+  <rect width="90" height="90" x="5" y="5" rx="20" fill="#ffd93d" stroke="#1d1d1d" stroke-width="6" filter="url(#shadow)"/>
+  <text x="50" y="65" font-size="52" text-anchor="middle" font-family="'Segoe UI Emoji', 'Apple Color Emoji', sans-serif">🐀</text>
+</svg>
