@@ -279,15 +279,7 @@ button, .w-btn, .icon-btn, .cta-btn {
 
 @media (hover: none) {
   #arena, .t, .powerup { cursor: auto !important; }
-  input, textarea, select {
-  cursor: text !important;
-}
-
-button, .w-btn, .icon-btn, .cta-btn {
-  cursor: pointer !important;
-}
-
-#cursor-tool { display: none !important; }
+  #cursor-tool { display: none !important; }
 }
 
 @media (max-width: 650px) {

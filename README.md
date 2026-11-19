@@ -1,6 +1,6 @@
 # BURNOUT 🐀
 
-An authentic indie arcade browser game where you smash the pressures of student life — entrance exams, surprise tests, coaching fees, cutoff ranks, and 75% attendance.
+An authentic indie arcade browser game where you smash the pressures of student life — finals, surprise quizzes, tuition bills, GPA drops, and mandatory attendance.
 
 **Play Live:** https://aadarshjain007.github.io/burnout/
 

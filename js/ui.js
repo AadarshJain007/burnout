@@ -72,32 +72,6 @@ function togglePause() {
   }
 }
 
-function addCustomHate() {
-  const input = $('own-input');
-  if (!input) return;
-  const val = input.value.trim();
-  if (!val) return;
-
-  const customData = {
-    name: val.toUpperCase(),
-    sub: 'Custom Enemy',
-    hp: 3,
-    type: 'standard',
-    obj: 'folder',
-    icon: '🎯',
-    pts: 300
-  };
-
-  spawnEnemy(customData);
-  const arenaEl = $('arena');
-  if (arenaEl && typeof spawnComicWord === 'function') {
-    const x = arenaEl.clientWidth / 2;
-    const y = arenaEl.clientHeight / 2;
-    spawnComicWord(x, y, 'TARGET ADDED! 🎯');
-  }
-  input.value = '';
-}
-
 function startCursorLoop() {
   const cursorTool = $('cursor-tool');
   if (!cursorTool) return;
@@ -165,16 +139,6 @@ function initUI() {
   document.querySelectorAll('.w-btn').forEach(btn => {
     btn.addEventListener('click', () => setWeapon(btn.dataset.w));
   });
-
-  const btnAddOwn = $('btn-add-own');
-  if (btnAddOwn) btnAddOwn.onclick = addCustomHate;
-
-  const inputOwn = $('own-input');
-  if (inputOwn) {
-    inputOwn.addEventListener('keydown', e => {
-      if (e.key === 'Enter') addCustomHate();
-    });
-  }
 
   const btnPause = $('btn-pause');
   if (btnPause) btnPause.onclick = togglePause;

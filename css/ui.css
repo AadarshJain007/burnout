@@ -234,40 +234,6 @@ footer {
   z-index: 10;
 }
 
-.footer-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 18px;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.quick-add-wrap {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.text-input {
-  font: inherit;
-  font-family: var(--font-hand);
-  font-size: 16px;
-  color: var(--ink);
-  background: var(--card);
-  border: 3px solid var(--ink);
-  border-radius: 10px 6px 12px 8px;
-  padding: 4px 10px;
-  box-shadow: 3px 3px 0 var(--ink);
-  outline: none;
-  width: min(220px, 45vw);
-  cursor: text !important;
-}
-
-.text-input:focus {
-  box-shadow: 4px 4px 0 var(--ink);
-}
-
 .weapon-bar {
   display: flex;
   gap: 12px;

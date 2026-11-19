@@ -9,7 +9,7 @@ function startWave(num) {
   if (hudWave) hudWave.textContent = num;
 
   const waveTitles = ['WAVE 1', 'WAVE 2', 'WAVE 3', 'WAVE 4', 'WAVE 5'];
-  const waveDescs = ['Unit Tests', 'Midterm Crisis', 'Practical Labs', 'Board Exams', 'Entrance Race'];
+  const waveDescs = ['Pop Quizzes', 'Midterm Crisis', 'Lab Reports', 'Final Exams', 'The Rat Race'];
   const title = waveTitles[num - 1] || `WAVE ${num}`;
   const desc = waveDescs[num - 1] || 'SMASH EVERYTHING';
 
