@@ -1,5 +1,30 @@
 const $ = id => document.getElementById(id);
 
+function updateClutterHud() {
+  const arenaEl = $('arena');
+  if (!arenaEl) return;
+  const count = arenaEl.querySelectorAll('.t:not(.boss)').length;
+  const clutterEl = $('clutter-count');
+  const warningEl = $('clutter-warning');
+  const memoEl = $('sticky-memo');
+  const deskEl = $('desk');
+  
+  if (clutterEl) clutterEl.textContent = `${count}/7`;
+  if (warningEl) {
+    if (count >= 5) {
+      warningEl.textContent = 'OVERFLOW WARNING!';
+      warningEl.className = 'memo-status danger';
+      if (memoEl) memoEl.classList.add('tremble');
+      if (deskEl) deskEl.classList.add('desk-rumble');
+    } else {
+      warningEl.textContent = count > 0 ? 'PILES MOUNTING' : 'DESK CLEAR';
+      warningEl.className = 'memo-status';
+      if (memoEl) memoEl.classList.remove('tremble');
+      if (deskEl) deskEl.classList.remove('desk-rumble');
+    }
+  }
+}
+
 function startWave(num) {
   State.wave = num;
   State.waveEnemiesRemaining = 10 + num * 3;
@@ -33,6 +58,7 @@ function triggerBossEncounter() {
   const bossData = BOSSES[Math.min(BOSSES.length - 1, State.wave - 1)];
   const bossEl = spawnEnemy(bossData, true);
   State.activeBossObj = bossEl;
+  updateClutterHud();
 
   const banner = $('wave-announcer');
   if (banner) {
@@ -47,6 +73,7 @@ function handleBossDefeat() {
   State.bossActive = false;
   audio.playVictory();
   triggerScreenShake(16);
+  updateClutterHud();
 
   if (State.wave >= 5) {
     triggerVictoryScreen();
@@ -61,8 +88,14 @@ function handleBossDefeat() {
 function triggerVictoryScreen() {
   State.running = false;
   $('gameover-modal').classList.add('open');
-  $('go-title').innerHTML = 'VICTORY <span>CLEARED!</span>';
+  $('go-title').innerHTML = 'CLEARED! <span>GRADUATED</span>';
   
+  const goStamp = $('go-stamp');
+  if (goStamp) {
+    goStamp.textContent = 'PASSED';
+    goStamp.className = 'folder-stamp-blue';
+  }
+
   $('go-score').textContent = State.pts;
   $('go-wave').textContent = '5 (WIN)';
   $('go-smashed').textContent = State.smashed;
@@ -77,8 +110,14 @@ function triggerGameOver(reasonTitle) {
   clearInterval(State.tickInterval);
 
   $('gameover-modal').classList.add('open');
-  $('go-title').innerHTML = `${reasonTitle || 'GAME'} <span>OVER</span>`;
+  $('go-title').innerHTML = `${reasonTitle || 'DESK'} <span>OVERFLOW</span>`;
   
+  const goStamp = $('go-stamp');
+  if (goStamp) {
+    goStamp.textContent = 'DISMISSED';
+    goStamp.className = 'folder-stamp-red';
+  }
+
   $('go-score').textContent = State.pts;
   $('go-wave').textContent = State.wave;
   $('go-smashed').textContent = State.smashed;
@@ -114,11 +153,13 @@ function startGame(mode = 'campaign') {
   for (let i = 0; i < 3; i++) {
     spawnRandomEnemy();
   }
+  updateClutterHud();
 
   clearInterval(State.spawnInterval);
   State.spawnInterval = setInterval(() => {
     if (!State.running || State.paused) return;
     spawnRandomEnemy();
+    updateClutterHud();
   }, 1900);
 
   clearInterval(State.sanityInterval);
@@ -151,6 +192,7 @@ function startGame(mode = 'campaign') {
         triggerScreenShake(9);
         updateSanity(-20);
         d.remove();
+        updateClutterHud();
       }
     });
   }, 1000);

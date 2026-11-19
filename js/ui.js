@@ -10,7 +10,7 @@ function setWeapon(wKey) {
     iconEl.innerHTML = WEAPONS[wKey].cursorSvg;
   }
   
-  document.querySelectorAll('.w-btn').forEach(btn => {
+  document.querySelectorAll('.tray-tool, .w-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.w === wKey);
   });
 }
@@ -25,21 +25,12 @@ function addPoints(n) {
   const hudPts = $('hud-pts');
   if (hudPts) {
     hudPts.textContent = State.pts;
-    const parentPill = hudPts.parentElement;
-    if (parentPill) {
-      parentPill.classList.remove('pop');
-      void parentPill.offsetWidth;
-      parentPill.classList.add('pop');
+    const parentRow = hudPts.parentElement;
+    if (parentRow) {
+      parentRow.classList.remove('pop');
+      void parentRow.offsetWidth;
+      parentRow.classList.add('pop');
     }
-  }
-
-  const hudRank = $('hud-rank');
-  if (hudRank && typeof RANKS !== 'undefined') {
-    let currentRank = RANKS[0][1];
-    for (const [thresh, title] of RANKS) {
-      if (State.pts >= thresh) currentRank = title;
-    }
-    hudRank.textContent = currentRank;
   }
 
   if (State.pts > State.highScore) {
@@ -127,7 +118,16 @@ function initUI() {
     }
   });
 
-  document.querySelectorAll('.w-btn').forEach(btn => {
+  window.addEventListener('wheel', e => {
+    if (!State.running || State.paused) return;
+    const weapons = ['hammer', 'bat', 'bomb'];
+    const curIdx = weapons.indexOf(State.weapon);
+    if (curIdx === -1) return;
+    const nextIdx = e.deltaY > 0 ? (curIdx + 1) % weapons.length : (curIdx - 1 + weapons.length) % weapons.length;
+    setWeapon(weapons[nextIdx]);
+  }, { passive: true });
+
+  document.querySelectorAll('.tray-tool, .w-btn').forEach(btn => {
     btn.addEventListener('click', () => setWeapon(btn.dataset.w));
   });
 

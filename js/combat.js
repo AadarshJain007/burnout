@@ -185,7 +185,10 @@ function destroyEnemy(t, x, y) {
   audio.playHit();
   spawnImpactPuff(x, y);
   t.classList.add('dying');
-  setTimeout(() => { if (t.parentNode) t.remove(); }, 180);
+  setTimeout(() => {
+    if (t.parentNode) t.remove();
+    if (typeof updateClutterHud === 'function') updateClutterHud();
+  }, 180);
   State.smashed++;
   
   spawnBurst(x, y, isBoss ? 45 : 18);
