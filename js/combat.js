@@ -1,10 +1,8 @@
-function triggerHitStop(ms = 35) {
+function triggerHitStop(ms = 30) {
   if (State.hitStop) return;
   State.hitStop = true;
-  document.body.classList.add('hit-stop');
   setTimeout(() => {
     State.hitStop = false;
-    document.body.classList.remove('hit-stop');
   }, ms);
 }
 
@@ -34,35 +32,33 @@ function handleAttack(target, x, y) {
 function detonateBomb(x, y) {
   const arenaEl = $('arena');
   if (State.bombs <= 0) {
-    spawnComicWord(x, y, 'OUT OF BOMBS! 💣');
+    spawnComicWord(x, y, 'OUT OF BOMBS!');
     return;
   }
   
   State.bombs--;
   updateBombHud();
   audio.playBomb();
-  triggerScreenShake(12);
+  triggerScreenShake(10);
   spawnShockwaveRing(x, y);
-  spawnBurst(x, y, 35);
+  spawnBurst(x, y, 14);
 
   const flashEl = $('flash');
   if (flashEl) {
-    flashEl.style.opacity = '0.45';
-    setTimeout(() => { flashEl.style.opacity = '0'; }, 180);
+    flashEl.style.opacity = '0.35';
+    setTimeout(() => { flashEl.style.opacity = '0'; }, 140);
   }
 
-  const arenaRect = arenaEl.getBoundingClientRect();
   const radius = WEAPONS.bomb.aoe;
-  const targets = [...arenaEl.querySelectorAll('.t')];
+  const targets = arenaEl.querySelectorAll('.t');
 
   targets.forEach(t => {
-    const b = t.getBoundingClientRect();
-    const cx = b.left + b.width / 2 - arenaRect.left;
-    const cy = b.top + b.height / 2 - arenaRect.top;
-    const dist = Math.hypot(cx - x, cy - y);
+    const tx = (parseFloat(t.style.left) || 0) + 85;
+    const ty = (parseFloat(t.style.top) || 0) + 70;
+    const dist = Math.hypot(tx - x, ty - y);
     if (dist <= radius) {
       const dmg = State.rageActive ? WEAPONS.bomb.dmg * 2 : WEAPONS.bomb.dmg;
-      applyDamage(t, dmg, cx, cy, true);
+      applyDamage(t, dmg, tx, ty, true);
     }
   });
 }
@@ -74,7 +70,7 @@ function applyDamage(t, baseDmg, x, y, fromExplosion = false) {
   if (t.classList.contains('type-shielded') && !t.dataset.shieldBroken) {
     t.dataset.shieldBroken = 'true';
     t.classList.remove('type-shielded');
-    spawnComicWord(x, y, 'SHIELD CRACKED! 🛡️');
+    spawnComicWord(x, y, 'SHIELD CRACKED!');
     audio.playHammer();
     return;
   }
@@ -92,7 +88,7 @@ function applyDamage(t, baseDmg, x, y, fromExplosion = false) {
   bumpCombo();
   chargeRage(isBoss ? 8 : 12);
   triggerScreenShake(isBoss ? 7 : 4);
-  triggerHitStop(isBoss ? 55 : 35);
+  triggerHitStop(isBoss ? 45 : 25);
   spawnDamagePopup(x, y, dmg);
 
   if (!t.querySelector('.cr')) {
@@ -100,13 +96,11 @@ function applyDamage(t, baseDmg, x, y, fromExplosion = false) {
     stamp.className = 'cr';
     stamp.textContent = '✕';
     t.appendChild(stamp);
-    setTimeout(() => stamp.remove(), 260);
+    setTimeout(() => stamp.remove(), 220);
   }
 
-  t.classList.remove('hit');
-  void t.offsetWidth;
-  t.classList.add('hit');
-  setTimeout(() => t.classList.remove('hit'), 220);
+  t.classList.remove('hit-recoil');
+  requestAnimationFrame(() => t.classList.add('hit-recoil'));
 
   paintHP(t);
 
@@ -126,56 +120,40 @@ function applyDamage(t, baseDmg, x, y, fromExplosion = false) {
 
 function applyBatKnockback(t, hitX, hitY) {
   const arenaEl = $('arena');
-  const arenaRect = arenaEl.getBoundingClientRect();
-  const b = t.getBoundingClientRect();
   const curX = parseFloat(t.style.left) || 0;
   const curY = parseFloat(t.style.top) || 0;
+  const cardCenterX = curX + 85;
+  const cardCenterY = curY + 70;
   
-  const dx = (b.left + b.width / 2 - arenaRect.left) - hitX;
-  const dy = (b.top + b.height / 2 - arenaRect.top) - hitY;
+  const dx = cardCenterX - hitX;
+  const dy = cardCenterY - hitY;
   const len = Math.hypot(dx, dy) || 1;
-  const pushDist = 140;
+  const pushDist = 120;
   
   let targetX = curX + (dx / len) * pushDist;
   let targetY = curY + (dy / len) * pushDist;
   
   const maxX = arenaEl.clientWidth - 180;
-  const maxY = arenaEl.clientHeight - 140;
+  const maxY = arenaEl.clientHeight - 150;
   let hitWall = false;
-  
+
   if (targetX < 10) { targetX = 14; hitWall = true; }
   else if (targetX > maxX) { targetX = maxX - 6; hitWall = true; }
   
   if (targetY < 10) { targetY = 14; hitWall = true; }
   else if (targetY > maxY) { targetY = maxY - 6; hitWall = true; }
   
-  t.style.transition = 'left 0.22s cubic-bezier(0.12, 0.95, 0.2, 1), top 0.22s';
+  t.style.transition = 'left 0.18s ease-out, top 0.18s ease-out';
   t.style.left = targetX + 'px';
   t.style.top = targetY + 'px';
 
   if (hitWall) {
     setTimeout(() => {
-      triggerScreenShake(5);
+      triggerScreenShake(4);
       audio.playHammer();
-      spawnComicWord(targetX, targetY, 'WALL SLAM! 💥');
-    }, 110);
+      spawnComicWord(targetX, targetY, 'WALL SLAM!');
+    }, 100);
   }
-
-  setTimeout(() => {
-    arenaEl.querySelectorAll('.t:not(.boss)').forEach(other => {
-      if (other !== t) {
-        const ob = other.getBoundingClientRect();
-        const tb = t.getBoundingClientRect();
-        if (
-          tb.left < ob.right && tb.right > ob.left &&
-          tb.top < ob.bottom && tb.bottom > ob.top
-        ) {
-          spawnComicWord(targetX, targetY, 'COLLISION! 💥');
-          applyDamage(other, 1, targetX, targetY, true);
-        }
-      }
-    });
-  }, 180);
 }
 
 function destroyEnemy(t, x, y) {
@@ -188,12 +166,12 @@ function destroyEnemy(t, x, y) {
   setTimeout(() => {
     if (t.parentNode) t.remove();
     if (typeof updateClutterHud === 'function') updateClutterHud();
-  }, 180);
+  }, 160);
   State.smashed++;
   
-  spawnBurst(x, y, isBoss ? 45 : 18);
+  spawnBurst(x, y, isBoss ? 16 : 8);
   const words = ['SMASHED!', 'CRUSHED!', 'DONE!'];
-  spawnComicWord(x, y, isBoss ? 'BOSS DOWN! 🏆' : words[Math.floor(Math.random() * words.length)]);
+  spawnComicWord(x, y, isBoss ? 'BOSS DOWN!' : words[Math.floor(Math.random() * words.length)]);
 
   const earned = Math.round(basePts * getComboMultiplier() * (isBoss ? 2 : 1));
   addPoints(earned);
@@ -208,7 +186,7 @@ function destroyEnemy(t, x, y) {
   if (State.smashed % 6 === 0) {
     State.bombs++;
     updateBombHud();
-    spawnComicWord(x, y - 40, '+1 BOMB 💣');
+    spawnComicWord(x, y - 40, '+1 BOMB');
   }
 
   if (isBoss) {
@@ -235,62 +213,33 @@ function bumpCombo() {
   if (State.combo > State.highestCombo) {
     State.highestCombo = State.combo;
   }
-
-  const el = $('combo-pill');
-  if (el) {
-    if (State.combo >= 2) {
-      el.classList.add('show');
-      const comboCount = $('combo-count');
-      if (comboCount) comboCount.textContent = `COMBO x${getComboMultiplier()}`;
-      const comboSub = $('combo-sub');
-      if (comboSub) comboSub.textContent = `${State.combo} HITS`;
-      audio.playCombo(State.combo);
-    } else {
-      el.classList.remove('show');
-    }
-  }
 }
 
 function getComboMultiplier() {
   return 1 + Math.floor(State.combo / 3);
 }
 
-setInterval(() => {
-  if (Date.now() - State.lastHitTime > 1400 && State.combo > 0) {
-    State.combo = 0;
-    const comboPill = $('combo-pill');
-    if (comboPill) comboPill.classList.remove('show');
-  }
-}, 250);
-
 function chargeRage(amount) {
   if (State.rageActive) return;
   State.rage = Math.min(100, State.rage + amount);
-  const rageFill = $('rage-fill');
-  if (rageFill) rageFill.style.width = State.rage + '%';
-  
   if (State.rage >= 100) {
-    activateRageMode(7000);
+    activateRageMode(6000);
   }
 }
 
-function activateRageMode(duration = 7000) {
+function activateRageMode(duration = 6000) {
   if (State.rageActive) return;
   const arenaEl = $('arena');
   State.rageActive = true;
-  document.body.classList.add('rage-active');
   
   audio.playBossAlert();
-  spawnComicWord(arenaEl.clientWidth / 2, arenaEl.clientHeight / 2, '🔥 RAGE MODE! 🔥');
-  triggerScreenShake(14);
+  spawnComicWord(arenaEl.clientWidth / 2, arenaEl.clientHeight / 2, 'RAGE MODE!');
+  triggerScreenShake(10);
 
   clearTimeout(State.rageTimer);
   State.rageTimer = setTimeout(() => {
     State.rageActive = false;
     State.rage = 0;
-    const rageFill = $('rage-fill');
-    if (rageFill) rageFill.style.width = '0%';
-    document.body.classList.remove('rage-active');
   }, duration);
 }
 
@@ -299,17 +248,11 @@ function updateSanity(delta) {
   const fill = $('sanity-fill');
   if (fill) {
     fill.style.width = State.sanity + '%';
-    if (delta < 0) {
-      fill.classList.remove('sanity-damage');
-      void fill.offsetWidth;
-      fill.classList.add('sanity-damage');
+    if (State.sanity < 25) {
+      fill.classList.add('low');
+    } else {
+      fill.classList.remove('low');
     }
-  }
-  
-  if (State.sanity < 25) {
-    if (fill) fill.classList.add('low');
-  } else {
-    if (fill) fill.classList.remove('low');
   }
 
   if (State.sanity <= 0) {

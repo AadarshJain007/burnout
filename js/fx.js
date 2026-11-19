@@ -3,12 +3,11 @@ function triggerScreenShake(intensity = 5) {
   const arenaEl = $('arena');
   if (!arenaEl) return;
   
+  const cls = intensity <= 5 ? 'shake-sm' : (intensity <= 10 ? 'shake-md' : 'shake-lg');
   arenaEl.classList.remove('shake-sm', 'shake-md', 'shake-lg');
-  void arenaEl.offsetWidth;
-  
-  if (intensity <= 5) arenaEl.classList.add('shake-sm');
-  else if (intensity <= 10) arenaEl.classList.add('shake-md');
-  else arenaEl.classList.add('shake-lg');
+  requestAnimationFrame(() => {
+    arenaEl.classList.add(cls);
+  });
 }
 
 function spawnComicWord(x, y, text) {
@@ -22,7 +21,7 @@ function spawnComicWord(x, y, text) {
   el.style.top = (y - 15) + 'px';
   arenaEl.appendChild(el);
   
-  setTimeout(() => el.remove(), 650);
+  setTimeout(() => el.remove(), 500);
 }
 
 function spawnScorePopup(x, y, pts) {
@@ -30,13 +29,14 @@ function spawnScorePopup(x, y, pts) {
   if (!arenaEl) return;
   
   const el = document.createElement('div');
-  el.className = 'score-fl';
+  el.className = 'fl';
+  el.style.color = '#16a34a';
   el.textContent = `+${pts}`;
   el.style.left = x + 'px';
   el.style.top = y + 'px';
   arenaEl.appendChild(el);
   
-  setTimeout(() => el.remove(), 600);
+  setTimeout(() => el.remove(), 450);
 }
 
 function spawnDamagePopup(x, y, dmg) {
@@ -44,35 +44,51 @@ function spawnDamagePopup(x, y, dmg) {
   if (!arenaEl) return;
   
   const el = document.createElement('div');
-  el.className = 'dmg-fl';
-  el.textContent = `-${dmg} HP`;
+  el.className = 'fl';
+  el.textContent = `-${dmg}`;
   el.style.left = (x - 24) + 'px';
   el.style.top = (y - 20) + 'px';
   arenaEl.appendChild(el);
   
-  setTimeout(() => el.remove(), 550);
+  setTimeout(() => el.remove(), 450);
 }
 
-function spawnBurst(x, y, count = 14) {
+function spawnBurst(x, y, count = 12) {
   const arenaEl = $('arena');
   if (!arenaEl) return;
   
-  for (let i = 0; i < count; i++) {
+  const frag = document.createDocumentFragment();
+  const shards = [];
+  const limit = Math.min(count, 12);
+  
+  for (let i = 0; i < limit; i++) {
     const s = document.createElement('div');
     s.className = 'shard';
     s.style.left = x + 'px';
     s.style.top = y + 'px';
     
-    const angle = Math.random() * Math.PI * 2;
-    const dist = 40 + Math.random() * (count > 25 ? 180 : 110);
-    arenaEl.appendChild(s);
+    const angle = (i / limit) * Math.PI * 2;
+    const dist = 30 + Math.random() * 50;
+    const dx = Math.cos(angle) * dist;
+    const dy = Math.sin(angle) * dist + 15;
     
-    requestAnimationFrame(() => {
-      s.style.transform = `translate3d(${Math.cos(angle)*dist}px, ${Math.sin(angle)*dist + 30}px, 0) rotate(${Math.random()*400 - 200}deg)`;
-      s.style.opacity = '0';
-    });
-    setTimeout(() => s.remove(), 550);
+    frag.appendChild(s);
+    shards.push({ el: s, dx, dy });
   }
+  
+  arenaEl.appendChild(frag);
+  
+  requestAnimationFrame(() => {
+    shards.forEach(item => {
+      item.el.style.transition = 'transform 0.28s ease-out, opacity 0.28s ease-out';
+      item.el.style.transform = `translate3d(${item.dx}px, ${item.dy}px, 0)`;
+      item.el.style.opacity = '0';
+    });
+  });
+  
+  setTimeout(() => {
+    shards.forEach(item => item.el.remove());
+  }, 300);
 }
 
 function spawnShockwaveRing(x, y) {
@@ -85,7 +101,7 @@ function spawnShockwaveRing(x, y) {
   ring.style.top = y + 'px';
   arenaEl.appendChild(ring);
   
-  setTimeout(() => ring.remove(), 380);
+  setTimeout(() => ring.remove(), 320);
 }
 
 function spawnSlashArc(x, y, weapon) {
@@ -93,33 +109,24 @@ function spawnSlashArc(x, y, weapon) {
   if (!arenaEl) return;
   
   const el = document.createElement('div');
-  el.className = `slash-fx slash-${weapon}`;
-  el.style.left = x + 'px';
-  el.style.top = y + 'px';
+  el.className = 'slash-fx';
+  el.style.left = (x - 22) + 'px';
+  el.style.top = (y - 22) + 'px';
   arenaEl.appendChild(el);
   
-  setTimeout(() => el.remove(), 180);
+  setTimeout(() => el.remove(), 140);
 }
 
 function spawnImpactPuff(x, y) {
-  const arenaEl = $('arena');
-  if (!arenaEl) return;
-  const puff = document.createElement('div');
-  puff.className = 'impact-puff';
-  puff.style.left = x + 'px';
-  puff.style.top = y + 'px';
-  arenaEl.appendChild(puff);
-  setTimeout(() => puff.remove(), 320);
+  spawnShockwaveRing(x, y);
 }
 
 function animateCursorSwing() {
-  const toolIcon = $('tool-icon') || $('cursor-tool');
-  if (!toolIcon) return;
-  
-  toolIcon.classList.remove('swing-hammer', 'swing-bat', 'throw-bomb');
-  void toolIcon.offsetWidth;
-  
-  if (State.weapon === 'hammer') toolIcon.classList.add('swing-hammer');
-  else if (State.weapon === 'bat') toolIcon.classList.add('swing-bat');
-  else toolIcon.classList.add('throw-bomb');
+  const cursorTool = $('cursor-tool');
+  if (!cursorTool) return;
+  const w = State.weapon;
+  const cls = `swing-${w}`;
+  cursorTool.classList.remove('swing-hammer', 'swing-bat', 'swing-bomb');
+  cursorTool.classList.add(cls);
+  setTimeout(() => cursorTool.classList.remove(cls), 150);
 }

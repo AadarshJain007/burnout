@@ -7,7 +7,6 @@ function updateClutterHud() {
   const clutterEl = $('clutter-count');
   const warningEl = $('clutter-warning');
   const memoEl = $('sticky-memo');
-  const deskEl = $('desk');
   
   if (clutterEl) clutterEl.textContent = `${count}/7`;
   if (warningEl) {
@@ -15,12 +14,10 @@ function updateClutterHud() {
       warningEl.textContent = 'OVERFLOW WARNING!';
       warningEl.className = 'memo-status danger';
       if (memoEl) memoEl.classList.add('tremble');
-      if (deskEl) deskEl.classList.add('desk-rumble');
     } else {
       warningEl.textContent = count > 0 ? 'PILES MOUNTING' : 'DESK CLEAR';
       warningEl.className = 'memo-status';
       if (memoEl) memoEl.classList.remove('tremble');
-      if (deskEl) deskEl.classList.remove('desk-rumble');
     }
   }
 }
@@ -47,7 +44,7 @@ function startWave(num) {
 
     setTimeout(() => {
       banner.classList.remove('active');
-    }, 2400);
+    }, 2200);
   }
 }
 
@@ -65,14 +62,14 @@ function triggerBossEncounter() {
     $('wa-title').textContent = 'BOSS INCOMING';
     $('wa-desc').textContent = bossData.name;
     banner.classList.add('active');
-    setTimeout(() => banner.classList.remove('active'), 2200);
+    setTimeout(() => banner.classList.remove('active'), 2000);
   }
 }
 
 function handleBossDefeat() {
   State.bossActive = false;
   audio.playVictory();
-  triggerScreenShake(16);
+  triggerScreenShake(12);
   updateClutterHud();
 
   if (State.wave >= 5) {
@@ -82,7 +79,7 @@ function handleBossDefeat() {
 
   setTimeout(() => {
     startWave(State.wave + 1);
-  }, 1200);
+  }, 1000);
 }
 
 function triggerVictoryScreen() {
@@ -145,7 +142,7 @@ function startGame(mode = 'campaign') {
   updateBombHud();
   updateSanity(0);
   
-  arenaEl.querySelectorAll('.t, .powerup, .shard, .fl, .ring, .crack').forEach(el => el.remove());
+  arenaEl.querySelectorAll('.t, .powerup, .shard, .fl, .ring, .slash-fx').forEach(el => el.remove());
   document.querySelectorAll('.overlay').forEach(m => m.classList.remove('open'));
   
   startWave(1);
@@ -183,13 +180,10 @@ function startGame(mode = 'campaign') {
       if (fill) fill.style.width = Math.max(0, (timeLeft / 8) * 100) + '%';
       
       if (timeLeft <= 0) {
-        const b = d.getBoundingClientRect();
-        const arenaRect = arenaEl.getBoundingClientRect();
-        const cx = b.left + b.width / 2 - arenaRect.left;
-        const cy = b.top + b.height / 2 - arenaRect.top;
-        
-        spawnComicWord(cx, cy, 'EXPIRED! -20 SANITY');
-        triggerScreenShake(9);
+        const tx = parseFloat(d.style.left) || 0;
+        const ty = parseFloat(d.style.top) || 0;
+        spawnComicWord(tx + 80, ty + 60, 'EXPIRED! -20 SANITY');
+        triggerScreenShake(7);
         updateSanity(-20);
         d.remove();
         updateClutterHud();

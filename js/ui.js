@@ -1,6 +1,3 @@
-let targetMouseX = -100, targetMouseY = -100;
-let cursorRafId = null;
-
 function setWeapon(wKey) {
   if (!WEAPONS[wKey]) return;
   State.weapon = wKey;
@@ -25,12 +22,6 @@ function addPoints(n) {
   const hudPts = $('hud-pts');
   if (hudPts) {
     hudPts.textContent = State.pts;
-    const parentRow = hudPts.parentElement;
-    if (parentRow) {
-      parentRow.classList.remove('pop');
-      void parentRow.offsetWidth;
-      parentRow.classList.add('pop');
-    }
   }
 
   if (State.pts > State.highScore) {
@@ -56,23 +47,6 @@ function togglePause() {
   }
 }
 
-function startCursorLoop() {
-  const cursorTool = $('cursor-tool');
-  if (!cursorTool) return;
-
-  function updateCursor() {
-    if (targetMouseX > 0) {
-      const x = targetMouseX - 32;
-      const y = targetMouseY - 36;
-      cursorTool.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-      cursorTool.style.setProperty('--cx', `${x}px`);
-      cursorTool.style.setProperty('--cy', `${y}px`);
-    }
-    cursorRafId = requestAnimationFrame(updateCursor);
-  }
-  cursorRafId = requestAnimationFrame(updateCursor);
-}
-
 function initUI() {
   const arenaEl = $('arena');
   const cursorTool = $('cursor-tool');
@@ -96,14 +70,12 @@ function initUI() {
     const overArena = arenaEl && (e.target === arenaEl || arenaEl.contains(e.target));
     if (overArena) {
       cursorTool.style.display = 'block';
-      targetMouseX = e.clientX;
-      targetMouseY = e.clientY;
+      cursorTool.style.transform = `translate3d(${e.clientX - 32}px, ${e.clientY - 36}px, 0)`;
     } else {
       cursorTool.style.display = 'none';
     }
   }, { passive: true });
 
-  startCursorLoop();
   setWeapon('hammer');
 
   window.addEventListener('keydown', e => {
