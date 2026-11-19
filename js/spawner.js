@@ -76,8 +76,9 @@ function spawnEnemy(data, isBoss = false) {
     timerHtml = '<div class="timer-bar"><div class="timer-fill"></div></div>';
   }
 
+  const iconMarkup = (data.iconKey && typeof ICONS !== 'undefined' && ICONS[data.iconKey]) ? ICONS[data.iconKey] : (data.icon || '📄');
   t.innerHTML = `
-    <div class="t-icon">${data.icon || '📄'}</div>
+    <div class="t-icon">${iconMarkup}</div>
     <b>${escapeHTML(data.name)}</b>
     <small>${escapeHTML(data.sub || '')}</small>
     <div class="hp-bar-wrap">
@@ -170,10 +171,10 @@ function spawnRandomEnemy() {
 function spawnPowerupDrop(x, y) {
   const arenaEl = $('arena');
   const types = [
-    { type: 'bomb', icon: '💣', label: '+2 BOMBS' },
-    { type: 'chai', icon: '☕', label: 'COFFEE RUSH' },
-    { type: 'peace', icon: '🧘', label: '+30 SANITY' },
-    { type: 'wipe', icon: '📜', label: 'CANCELLATION' }
+    { type: 'bomb', iconHtml: '<svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="14" cy="18" r="9"/><path d="M20 11l3-3"/></svg>', label: '+2 BOMBS' },
+    { type: 'chai', iconHtml: '<svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 10h16v12a4 4 0 01-4 4H10a4 4 0 01-4-4V10zm16 3h3a2 2 0 012 2v2a2 2 0 01-2 2h-3M10 4v3M14 4v3M18 4v3"/></svg>', label: 'COFFEE RUSH' },
+    { type: 'peace', iconHtml: '<svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 4v24M4 16h24M8 8l16 16M24 8L8 24"/></svg>', label: '+30 SANITY' },
+    { type: 'wipe', iconHtml: '<svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l20 20M26 6L6 26"/></svg>', label: 'CANCELLATION' }
   ];
   const item = types[Math.floor(Math.random() * types.length)];
   
@@ -181,7 +182,7 @@ function spawnPowerupDrop(x, y) {
   p.className = 'powerup';
   p.style.left = Math.min(arenaEl.clientWidth - 70, Math.max(10, x - 32)) + 'px';
   p.style.top = Math.min(arenaEl.clientHeight - 80, Math.max(10, y - 32)) + 'px';
-  p.innerHTML = `<span>${item.icon}</span><small>${item.label}</small>`;
+  p.innerHTML = `<span>${item.iconHtml}</span><small>${item.label}</small>`;
   
   p.addEventListener('pointerdown', e => {
     e.stopPropagation();

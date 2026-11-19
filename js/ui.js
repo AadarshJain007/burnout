@@ -1,14 +1,14 @@
 let targetMouseX = -100, targetMouseY = -100;
 let cursorRafId = null;
-let quoteInterval = null;
-let quoteIndex = 0;
 
 function setWeapon(wKey) {
   if (!WEAPONS[wKey]) return;
   State.weapon = wKey;
   
   const iconEl = $('tool-icon') || $('cursor-tool');
-  if (iconEl) iconEl.textContent = WEAPONS[wKey].icon;
+  if (iconEl && WEAPONS[wKey].cursorSvg) {
+    iconEl.innerHTML = WEAPONS[wKey].cursorSvg;
+  }
   
   document.querySelectorAll('.w-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.w === wKey);
@@ -45,13 +45,6 @@ function addPoints(n) {
   if (State.pts > State.highScore) {
     saveHighScore();
   }
-}
-
-function rotateQuote() {
-  const qBar = $('quote-bar');
-  if (!qBar || !QUOTES || QUOTES.length === 0) return;
-  quoteIndex = (quoteIndex + 1) % QUOTES.length;
-  qBar.textContent = `"${QUOTES[quoteIndex]}"`;
 }
 
 function openModal(id) {
@@ -120,9 +113,7 @@ function initUI() {
   }, { passive: true });
 
   startCursorLoop();
-
-  if (quoteInterval) clearInterval(quoteInterval);
-  quoteInterval = setInterval(rotateQuote, 6000);
+  setWeapon('hammer');
 
   window.addEventListener('keydown', e => {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;

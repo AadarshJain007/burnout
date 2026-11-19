@@ -272,3 +272,7 @@ body.rage-active .rage-fill {
   35% { transform: translate3d(8px, -24px, 0) scale(1.35) rotate(4deg); opacity: 1; }
   100% { transform: translate3d(16px, -52px, 0) scale(0.9) rotate(8deg); opacity: 0; }
 }
+
+body.hit-stop #arena {
+  filter: contrast(1.15) brightness(1.05);
+}

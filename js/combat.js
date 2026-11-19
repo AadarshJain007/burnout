@@ -1,3 +1,13 @@
+function triggerHitStop(ms = 35) {
+  if (State.hitStop) return;
+  State.hitStop = true;
+  document.body.classList.add('hit-stop');
+  setTimeout(() => {
+    State.hitStop = false;
+    document.body.classList.remove('hit-stop');
+  }, ms);
+}
+
 function handleAttack(target, x, y) {
   const now = Date.now();
   const wConfig = WEAPONS[State.weapon];
@@ -82,6 +92,7 @@ function applyDamage(t, baseDmg, x, y, fromExplosion = false) {
   bumpCombo();
   chargeRage(isBoss ? 8 : 12);
   triggerScreenShake(isBoss ? 7 : 4);
+  triggerHitStop(isBoss ? 55 : 35);
   spawnDamagePopup(x, y, dmg);
 
   if (!t.querySelector('.cr')) {
@@ -123,14 +134,32 @@ function applyBatKnockback(t, hitX, hitY) {
   const dx = (b.left + b.width / 2 - arenaRect.left) - hitX;
   const dy = (b.top + b.height / 2 - arenaRect.top) - hitY;
   const len = Math.hypot(dx, dy) || 1;
-  const pushDist = 80;
+  const pushDist = 140;
   
-  const targetX = Math.min(arenaEl.clientWidth - 180, Math.max(10, curX + (dx / len) * pushDist));
-  const targetY = Math.min(arenaEl.clientHeight - 140, Math.max(10, curY + (dy / len) * pushDist));
-
-  t.style.transition = 'left 0.25s cubic-bezier(0.1, 0.9, 0.2, 1), top 0.25s';
+  let targetX = curX + (dx / len) * pushDist;
+  let targetY = curY + (dy / len) * pushDist;
+  
+  const maxX = arenaEl.clientWidth - 180;
+  const maxY = arenaEl.clientHeight - 140;
+  let hitWall = false;
+  
+  if (targetX < 10) { targetX = 14; hitWall = true; }
+  else if (targetX > maxX) { targetX = maxX - 6; hitWall = true; }
+  
+  if (targetY < 10) { targetY = 14; hitWall = true; }
+  else if (targetY > maxY) { targetY = maxY - 6; hitWall = true; }
+  
+  t.style.transition = 'left 0.22s cubic-bezier(0.12, 0.95, 0.2, 1), top 0.22s';
   t.style.left = targetX + 'px';
   t.style.top = targetY + 'px';
+
+  if (hitWall) {
+    setTimeout(() => {
+      triggerScreenShake(5);
+      audio.playHammer();
+      spawnComicWord(targetX, targetY, 'WALL SLAM! 💥');
+    }, 110);
+  }
 
   setTimeout(() => {
     arenaEl.querySelectorAll('.t:not(.boss)').forEach(other => {
