@@ -1,12 +1,12 @@
 function setWeapon(wKey) {
   if (!WEAPONS[wKey]) return;
   State.weapon = wKey;
-  
+
   const iconEl = $('tool-icon') || $('cursor-tool');
   if (iconEl && WEAPONS[wKey].cursorSvg) {
     iconEl.innerHTML = WEAPONS[wKey].cursorSvg;
   }
-  
+
   document.querySelectorAll('.tray-tool, .w-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.w === wKey);
   });
@@ -38,7 +38,7 @@ function openModal(id) {
 function togglePause() {
   if (!State.running) return;
   State.paused = !State.paused;
-  
+
   const pauseModal = $('pause-modal');
   if (State.paused) {
     if (pauseModal) pauseModal.classList.add('open');
@@ -55,11 +55,11 @@ function initUI() {
     arenaEl.addEventListener('pointerdown', e => {
       if (!State.running || State.paused) return;
       audio.ensureContext();
-      
+
       const rect = arenaEl.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      
+
       const target = e.target.closest('.t');
       handleAttack(target, x, y);
     });
@@ -80,7 +80,7 @@ function initUI() {
 
   window.addEventListener('keydown', e => {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
-    
+
     if (e.key === '1') setWeapon('hammer');
     else if (e.key === '2') setWeapon('bat');
     else if (e.key === '3') setWeapon('bomb');
@@ -148,7 +148,7 @@ function initUI() {
 
   const btnMute = $('btn-audio-mute');
   if (btnMute) {
-    btnMute.onclick = function() {
+    btnMute.onclick = function () {
       State.sound = !State.sound;
       this.textContent = State.sound ? '🔊' : '🔇';
     };

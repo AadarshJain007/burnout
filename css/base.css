@@ -1,18 +1,18 @@
 :root {
-  --desk-wood: #2a1b12;
-  --desk-grain: #1b1009;
-  --blotter-bg: #1e2d24;
-  --blotter-border: #131c16;
-  --paper: #f7f4ea;
+  --desk-wood: #26160d;
+  --blotter-bg: #1c2b22;
+  --blotter-border: #0f1913;
+  --paper-cream: #faf6ee;
+  --paper-yellow: #fef9c3;
+  --paper-blue: #e0f2fe;
+  --paper-white: #fdfbf7;
   --ink: #1c1917;
-  --card: #fffef8;
-  --red: #dc2626;
-  --yellow: #f59e0b;
-  --blue: #2563eb;
-  --green: #16a34a;
-  --font-marker: "Permanent Marker", "Impact", cursive, sans-serif;
-  --font-hand: "Patrick Hand", "Comic Sans MS", cursive, sans-serif;
-  --font-scribble: "Caveat", cursive, sans-serif;
+  --red-stamp: #b91c1c;
+  --blue-pen: #1d4ed8;
+  --pencil: #44403c;
+  --font-hand: "Kalam", cursive, sans-serif;
+  --font-type: "Special Elite", monospace, sans-serif;
+  --font-marker: "Permanent Marker", cursive, sans-serif;
 }
 
 * {
@@ -29,7 +29,7 @@ html, body {
   background: var(--desk-wood);
   color: var(--ink);
   font-family: var(--font-hand);
-  font-size: 19px;
+  font-size: 18px;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -45,9 +45,34 @@ html, body {
   justify-content: center;
   background-color: var(--desk-wood);
   background-image:
-    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.02) 0px, rgba(255, 255, 255, 0.02) 1px, transparent 1px, transparent 18px),
-    radial-gradient(circle at 50% 50%, #3e2619 0%, #28170e 65%, #140b06 100%);
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.015) 0px, rgba(255, 255, 255, 0.015) 1px, transparent 1px, transparent 20px),
+    radial-gradient(circle at 50% 40%, #4a2d1d 0%, #2c170d 60%, #120703 100%);
   transform: translateZ(0);
+}
+
+.desk-decor {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.85;
+}
+
+.decor-penstand {
+  top: 14px;
+  left: 210px;
+  transform: rotate(6deg);
+}
+
+.decor-calculator {
+  bottom: 22px;
+  left: 30px;
+  transform: rotate(-8deg);
+}
+
+.decor-earphones {
+  bottom: 110px;
+  right: 25px;
+  transform: rotate(18deg);
 }
 
 #cursor-tool {
@@ -90,15 +115,10 @@ html, body {
   animation: bomb-fuse 0.14s ease-out;
 }
 
-.desk-mat-credit {
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--font-hand);
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  color: rgba(245, 242, 235, 0.4);
-  pointer-events: none;
-  white-space: nowrap;
+@media (max-width: 768px) {
+  .decor-penstand,
+  .decor-calculator,
+  .decor-earphones {
+    display: none;
+  }
 }

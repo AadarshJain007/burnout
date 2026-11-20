@@ -5,17 +5,27 @@ function updateClutterHud() {
   if (!arenaEl) return;
   const count = arenaEl.querySelectorAll('.t:not(.boss)').length;
   const clutterEl = $('clutter-count');
+  const tallyEl = $('clutter-tally');
   const warningEl = $('clutter-warning');
   const memoEl = $('sticky-memo');
   
   if (clutterEl) clutterEl.textContent = `${count}/7`;
+  if (tallyEl) {
+    let tallyStr = '';
+    for (let i = 0; i < count; i++) {
+      if ((i + 1) % 5 === 0) tallyStr += '<s>||||</s> ';
+      else tallyStr += '|';
+    }
+    tallyEl.innerHTML = tallyStr || '-';
+  }
+
   if (warningEl) {
     if (count >= 5) {
-      warningEl.textContent = 'OVERFLOW WARNING!';
+      warningEl.textContent = 'DESK OVERFLOWING!';
       warningEl.className = 'memo-status danger';
       if (memoEl) memoEl.classList.add('tremble');
     } else {
-      warningEl.textContent = count > 0 ? 'PILES MOUNTING' : 'DESK CLEAR';
+      warningEl.textContent = count > 0 ? 'PAPERS PILING UP' : 'DESK CLEAR';
       warningEl.className = 'memo-status';
       if (memoEl) memoEl.classList.remove('tremble');
     }
@@ -31,9 +41,15 @@ function startWave(num) {
   if (hudWave) hudWave.textContent = num;
 
   const waveTitles = ['WAVE 1', 'WAVE 2', 'WAVE 3', 'WAVE 4', 'WAVE 5'];
-  const waveDescs = ['Pop Quizzes', 'Midterm Crisis', 'Lab Reports', 'Final Exams', 'The Rat Race'];
-  const title = waveTitles[num - 1] || `WAVE ${num}`;
-  const desc = waveDescs[num - 1] || 'SMASH EVERYTHING';
+  const waveDescs = [
+    'INTERNAL ASSIGNMENTS',
+    'MID-SEM EXAM CRISIS',
+    'PRACTICAL LAB VIVA',
+    'END-SEM MARATHON',
+    'CAMPUS PLACEMENT WAR'
+  ];
+  const title = waveTitles[num - 1] || `SEM WAVE ${num}`;
+  const desc = waveDescs[num - 1] || 'SMASH ALL CLUTTER';
 
   const banner = $('wave-announcer');
   if (banner) {
@@ -59,7 +75,7 @@ function triggerBossEncounter() {
 
   const banner = $('wave-announcer');
   if (banner) {
-    $('wa-title').textContent = 'BOSS INCOMING';
+    $('wa-title').textContent = 'FACULTY INCOMING!';
     $('wa-desc').textContent = bossData.name;
     banner.classList.add('active');
     setTimeout(() => banner.classList.remove('active'), 2000);
@@ -85,7 +101,7 @@ function handleBossDefeat() {
 function triggerVictoryScreen() {
   State.running = false;
   $('gameover-modal').classList.add('open');
-  $('go-title').innerHTML = 'CLEARED! <span>GRADUATED</span>';
+  $('go-title').innerHTML = 'DEGREE CLEARED! <span>GRADUATED</span>';
   
   const goStamp = $('go-stamp');
   if (goStamp) {
@@ -94,7 +110,7 @@ function triggerVictoryScreen() {
   }
 
   $('go-score').textContent = State.pts;
-  $('go-wave').textContent = '5 (WIN)';
+  $('go-wave').textContent = '5 (PASSED)';
   $('go-smashed').textContent = State.smashed;
   $('go-combo').textContent = `x${State.highestCombo}`;
   saveHighScore();
@@ -107,11 +123,11 @@ function triggerGameOver(reasonTitle) {
   clearInterval(State.tickInterval);
 
   $('gameover-modal').classList.add('open');
-  $('go-title').innerHTML = `${reasonTitle || 'DESK'} <span>OVERFLOW</span>`;
+  $('go-title').innerHTML = `${reasonTitle || 'YEAR BACK!'} <span>OVERFLOW</span>`;
   
   const goStamp = $('go-stamp');
   if (goStamp) {
-    goStamp.textContent = 'DISMISSED';
+    goStamp.textContent = 'DE-BARRED';
     goStamp.className = 'folder-stamp-red';
   }
 
@@ -143,6 +159,8 @@ function startGame(mode = 'campaign') {
   updateSanity(0);
   
   arenaEl.querySelectorAll('.t, .powerup, .shard, .fl, .ring, .slash-fx').forEach(el => el.remove());
+  const debris = $('debris-layer');
+  if (debris) debris.innerHTML = '';
   document.querySelectorAll('.overlay').forEach(m => m.classList.remove('open'));
   
   startWave(1);
@@ -182,8 +200,8 @@ function startGame(mode = 'campaign') {
       if (timeLeft <= 0) {
         const tx = parseFloat(d.style.left) || 0;
         const ty = parseFloat(d.style.top) || 0;
-        spawnComicWord(tx + 80, ty + 60, 'EXPIRED! -20 SANITY');
-        triggerScreenShake(7);
+        spawnComicWord(tx + 80, ty + 60, 'SUBMISSION MISSED! -20 SANITY');
+        triggerScreenShake(8);
         updateSanity(-20);
         d.remove();
         updateClutterHud();

@@ -1,48 +1,58 @@
 #arena.shake-sm { animation: shake-anim-sm 0.12s ease-out; }
 #arena.shake-md { animation: shake-anim-md 0.15s ease-out; }
 #arena.shake-lg { animation: shake-anim-lg 0.18s ease-out; }
+#arena.shake-huge { animation: shake-anim-huge 0.24s ease-out; }
 
 @keyframes shake-anim-sm {
   0% { transform: translate3d(0, 0, 0); }
   25% { transform: translate3d(-3px, 2px, 0); }
   50% { transform: translate3d(3px, -2px, 0); }
-  75% { transform: translate3d(-2px, -1px, 0); }
+  75% { transform: translate3d(-2px, 1px, 0); }
   100% { transform: translate3d(0, 0, 0); }
 }
 
 @keyframes shake-anim-md {
   0% { transform: translate3d(0, 0, 0); }
-  25% { transform: translate3d(-5px, 3px, 0); }
-  50% { transform: translate3d(5px, -3px, 0); }
+  25% { transform: translate3d(-6px, 3px, 0); }
+  50% { transform: translate3d(6px, -3px, 0); }
   75% { transform: translate3d(-3px, 2px, 0); }
   100% { transform: translate3d(0, 0, 0); }
 }
 
 @keyframes shake-anim-lg {
   0% { transform: translate3d(0, 0, 0); }
-  25% { transform: translate3d(-8px, 5px, 0); }
-  50% { transform: translate3d(8px, -5px, 0); }
+  25% { transform: translate3d(-9px, 5px, 0) rotate(-0.5deg); }
+  50% { transform: translate3d(9px, -5px, 0) rotate(0.5deg); }
   75% { transform: translate3d(-5px, 3px, 0); }
   100% { transform: translate3d(0, 0, 0); }
 }
 
+@keyframes shake-anim-huge {
+  0% { transform: translate3d(0, 0, 0); }
+  20% { transform: translate3d(-14px, 8px, 0) rotate(-1deg); }
+  40% { transform: translate3d(14px, -7px, 0) rotate(1deg); }
+  60% { transform: translate3d(-8px, 4px, 0); }
+  80% { transform: translate3d(5px, -3px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
 @keyframes hit-shake {
-  0% { transform: rotate(var(--rot, 0deg)) scale(1.15, 0.85); }
-  35% { transform: rotate(var(--rot, 0deg)) translate3d(-6px, 3px, 0) scale(0.95, 1.05); }
+  0% { transform: rotate(var(--rot, 0deg)) scale(1.14, 0.86); }
+  35% { transform: rotate(var(--rot, 0deg)) translate3d(-6px, 3px, 0) scale(0.96, 1.04); }
   70% { transform: rotate(var(--rot, 0deg)) translate3d(4px, -2px, 0); }
   100% { transform: rotate(var(--rot, 0deg)) scale(1, 1); }
 }
 
 @keyframes card-die {
   0% { transform: translate3d(0, 0, 0) rotate(var(--rot, 0deg)) scale(1); opacity: 1; }
-  40% { transform: translate3d(0, -10px, 0) rotate(var(--rot, 0deg)) scale(1.15, 0.85); opacity: 1; }
-  100% { transform: translate3d(0, 20px, 0) rotate(calc(var(--rot, 0deg) + 20deg)) scale(0.1); opacity: 0; }
+  35% { transform: translate3d(0, -10px, 0) rotate(calc(var(--rot, 0deg) - 10deg)) scale(1.15, 0.85); opacity: 1; }
+  100% { transform: translate3d(0, 24px, 0) rotate(calc(var(--rot, 0deg) + 30deg)) scale(0.08); opacity: 0; }
 }
 
 @keyframes card-pop {
   0% { transform: translate3d(0, 16px, 0) scale(0.4); opacity: 0; }
   70% { transform: translate3d(0, -3px, 0) scale(1.04); opacity: 1; }
-  100% { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
+  100% { transform: translate3d(0, 0, 0) scale(1) rotate(var(--rot, 0deg)); opacity: 1; }
 }
 
 @keyframes boss-entrance {
@@ -71,13 +81,31 @@
 }
 
 @keyframes memo-shake {
-  0% { transform: rotate(-3deg) translate3d(0, 0, 0); }
+  0% { transform: rotate(-4deg) translate3d(0, 0, 0); }
   100% { transform: rotate(-2deg) translate3d(1px, -2px, 0); }
 }
 
 @keyframes pulse-danger {
   0% { transform: scale(0.98); }
   100% { transform: scale(1.02); }
+}
+
+@keyframes steam-rise {
+  0% { transform: translate3d(0, 0, 0) scale(0.9); opacity: 0.3; }
+  100% { transform: translate3d(0, -6px, 0) scale(1.2); opacity: 0.8; }
+}
+
+@keyframes mug-panic {
+  0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  25% { transform: translate3d(-2px, 1px, 0) rotate(-3deg); }
+  75% { transform: translate3d(2px, -1px, 0) rotate(3deg); }
+  100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+}
+
+@keyframes combo-wobble {
+  0% { transform: rotate(0deg) scale(0.8); }
+  50% { transform: rotate(8deg) scale(1.3); }
+  100% { transform: rotate(6deg) scale(1); }
 }
 
 @keyframes float-up-fade {

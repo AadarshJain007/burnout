@@ -1,13 +1,64 @@
-function triggerScreenShake(intensity = 5) {
+function triggerScreenShake(intensity = 6) {
   if (State.shakeFactor <= 0) return;
   const arenaEl = $('arena');
   if (!arenaEl) return;
   
-  const cls = intensity <= 5 ? 'shake-sm' : (intensity <= 10 ? 'shake-md' : 'shake-lg');
-  arenaEl.classList.remove('shake-sm', 'shake-md', 'shake-lg');
+  let cls = 'shake-sm';
+  if (intensity > 15) cls = 'shake-huge';
+  else if (intensity > 9) cls = 'shake-lg';
+  else if (intensity > 5) cls = 'shake-md';
+
+  arenaEl.classList.remove('shake-sm', 'shake-md', 'shake-lg', 'shake-huge');
   requestAnimationFrame(() => {
     arenaEl.classList.add(cls);
   });
+}
+
+function spawnDeskDent(x, y) {
+  const layer = $('debris-layer');
+  if (!layer) return;
+  const dent = document.createElement('div');
+  dent.className = 'desk-dent';
+  dent.style.left = x + 'px';
+  dent.style.top = y + 'px';
+  layer.appendChild(dent);
+  setTimeout(() => {
+    dent.style.opacity = '0';
+    setTimeout(() => dent.remove(), 1000);
+  }, 2500);
+}
+
+function spawnDeskScorch(x, y) {
+  const layer = $('debris-layer');
+  if (!layer) return;
+  const scorch = document.createElement('div');
+  scorch.className = 'desk-scorch';
+  scorch.style.left = x + 'px';
+  scorch.style.top = y + 'px';
+  layer.appendChild(scorch);
+  setTimeout(() => {
+    scorch.style.opacity = '0';
+    setTimeout(() => scorch.remove(), 1200);
+  }, 3000);
+}
+
+function updateComboDisplay(combo) {
+  const hud = $('combo-hud');
+  const textEl = $('combo-text');
+  if (!hud || !textEl) return;
+  
+  if (combo >= 2) {
+    const titles = ['COMBO', 'FATAK!', 'DHO DAALA!', 'FULL RAGE!', 'GOD LEVEL!'];
+    const label = titles[Math.min(titles.length - 1, Math.floor((combo - 2) / 2))];
+    textEl.textContent = `${label} x${combo}`;
+    hud.classList.add('active');
+    textEl.style.animation = 'none';
+    requestAnimationFrame(() => {
+      textEl.style.animation = '';
+    });
+  } else {
+    hud.classList.remove('active');
+  }
 }
 
 function spawnComicWord(x, y, text) {
@@ -53,42 +104,43 @@ function spawnDamagePopup(x, y, dmg) {
   setTimeout(() => el.remove(), 450);
 }
 
-function spawnBurst(x, y, count = 12) {
+function spawnBurst(x, y, count = 14) {
   const arenaEl = $('arena');
   if (!arenaEl) return;
   
   const frag = document.createDocumentFragment();
   const shards = [];
-  const limit = Math.min(count, 12);
+  const limit = Math.min(count, 16);
   
   for (let i = 0; i < limit; i++) {
     const s = document.createElement('div');
-    s.className = 'shard';
+    s.className = 'shard shard-scrap';
     s.style.left = x + 'px';
     s.style.top = y + 'px';
     
     const angle = (i / limit) * Math.PI * 2;
-    const dist = 30 + Math.random() * 50;
+    const dist = 35 + Math.random() * 65;
     const dx = Math.cos(angle) * dist;
-    const dy = Math.sin(angle) * dist + 15;
+    const dy = Math.sin(angle) * dist + 20;
+    const rot = Math.random() * 360;
     
     frag.appendChild(s);
-    shards.push({ el: s, dx, dy });
+    shards.push({ el: s, dx, dy, rot });
   }
   
   arenaEl.appendChild(frag);
   
   requestAnimationFrame(() => {
     shards.forEach(item => {
-      item.el.style.transition = 'transform 0.28s ease-out, opacity 0.28s ease-out';
-      item.el.style.transform = `translate3d(${item.dx}px, ${item.dy}px, 0)`;
+      item.el.style.transition = 'transform 0.32s ease-out, opacity 0.32s ease-out';
+      item.el.style.transform = `translate3d(${item.dx}px, ${item.dy}px, 0) rotate(${item.rot}deg)`;
       item.el.style.opacity = '0';
     });
   });
   
   setTimeout(() => {
     shards.forEach(item => item.el.remove());
-  }, 300);
+  }, 350);
 }
 
 function spawnShockwaveRing(x, y) {
@@ -104,7 +156,7 @@ function spawnShockwaveRing(x, y) {
   setTimeout(() => ring.remove(), 320);
 }
 
-function spawnSlashArc(x, y, weapon) {
+function spawnSlashArc(x, y) {
   const arenaEl = $('arena');
   if (!arenaEl) return;
   

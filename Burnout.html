@@ -6,7 +6,7 @@
   <title>BURNOUT</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Patrick+Hand&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Permanent+Marker&family=Special+Elite&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="alternate icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐀</text></svg>">
   <link rel="stylesheet" href="css/base.css">
@@ -20,19 +20,19 @@
 
   <div id="intro-modal" class="overlay open">
     <div class="manilla-folder">
-      <div class="folder-tab">CASE FILE #001: BURNOUT</div>
+      <div class="folder-tab">FILE #2026: ACADEMIC BURNOUT</div>
       <div class="folder-content">
         <div class="coffee-stain"></div>
-        <div class="folder-stamp-red">CLASSIFIED</div>
-        <h2>ACADEMIC & WORK<br><span>BURNOUT</span></h2>
+        <div class="folder-stamp-red">DE-BARRED NOTICE</div>
+        <h2>SEMESTER END<br><span>BURNOUT</span></h2>
         <p class="tagline">
-          Finals, tuition bills, lab reports, pop quizzes and infinite rat race memos are piling onto your study desk.
+          74% attendance, backlog forms, viva with externals, and hostel mess notices are burying your study desk.
         </p>
         <p class="folder-directive">
-          DIRECTIVE: Take whatever tool is on your desk and pulverize every single sheet before your sanity crashes.
+          ASSIGNMENT: Grab the hammer, cricket bat, or bomb on your desk and smash every paper before your chai gets cold and sanity hits zero.
         </p>
         <div class="stamp-action">
-          <button id="btn-start-game" class="stamp-btn">CONFIRM & SMASH</button>
+          <button id="btn-start-game" class="stamp-btn">START SMASHING</button>
         </div>
         <div class="creator-credit">Made by Aadarsh Jain</div>
       </div>
@@ -41,14 +41,14 @@
 
   <div id="pause-modal" class="overlay">
     <div class="manilla-folder">
-      <div class="folder-tab">NOTICE OF SUSPENSION</div>
+      <div class="folder-tab">STUDY BREAK</div>
       <div class="folder-content">
         <div class="folder-stamp-blue">PAUSED</div>
-        <h2>STUDY SESSION<br><span>HALTED</span></h2>
-        <p class="tagline">Desk timer suspended. Take a breath or dive back into the pile.</p>
+        <h2>VIVA <span>SUSPENDED</span></h2>
+        <p class="tagline">Taking a 5-minute chai break. The pile will be waiting when you return.</p>
         <div class="stamp-action-row">
-          <button id="btn-resume" class="stamp-btn stamp-sm">RESUME</button>
-          <button id="btn-pause-restart" class="stamp-btn stamp-sm stamp-sub">RESTART</button>
+          <button id="btn-resume" class="stamp-btn stamp-sm">RESUME STUDY</button>
+          <button id="btn-pause-restart" class="stamp-btn stamp-sm stamp-sub">RESTART SEM</button>
           <button id="btn-pause-menu" class="stamp-btn stamp-sm stamp-sub">DESK MENU</button>
         </div>
       </div>
@@ -57,14 +57,14 @@
 
   <div id="gameover-modal" class="overlay">
     <div class="manilla-folder">
-      <div class="folder-tab">INCIDENT REPORT #404</div>
+      <div class="folder-tab">FINAL GRADE SHEET</div>
       <div class="folder-content">
-        <div id="go-stamp" class="folder-stamp-red">DISMISSED</div>
+        <div id="go-stamp" class="folder-stamp-red">YEAR BACK</div>
         <h2 id="go-title">DESK <span>OVERFLOW</span></h2>
         
         <div class="stats-box">
           <div>
-            <span class="label">SCORE</span>
+            <span class="label">MARKS</span>
             <div id="go-score" class="val val-red">0</div>
           </div>
           <div>
@@ -82,7 +82,7 @@
         </div>
 
         <div class="stamp-action-row" style="margin-top: 18px;">
-          <button id="btn-restart" class="stamp-btn stamp-sm">CLEAR DESK & RETAKE</button>
+          <button id="btn-restart" class="stamp-btn stamp-sm">RE-APPEAR IN EXAM</button>
           <button id="btn-go-menu" class="stamp-btn stamp-sm stamp-sub">DESK MENU</button>
         </div>
 
@@ -92,20 +92,76 @@
   </div>
 
   <main id="desk">
+    <div class="desk-decor decor-penstand">
+      <svg viewBox="0 0 70 90" width="60" height="75">
+        <rect x="15" y="35" width="40" height="52" rx="4" fill="#334155" stroke="#1e293b" stroke-width="2"/>
+        <line x1="22" y1="35" x2="16" y2="6" stroke="#dc2626" stroke-width="4" stroke-linecap="round"/>
+        <polygon points="16,6 14,0 18,2" fill="#f87171"/>
+        <line x1="35" y1="35" x2="33" y2="4" stroke="#2563eb" stroke-width="4.5" stroke-linecap="round"/>
+        <line x1="48" y1="35" x2="54" y2="10" stroke="#facc15" stroke-width="6" stroke-linecap="round"/>
+        <rect x="20" y="55" width="30" height="4" rx="2" fill="#475569"/>
+      </svg>
+    </div>
+
+    <div class="desk-decor decor-calculator">
+      <svg viewBox="0 0 65 95" width="55" height="80">
+        <rect x="2" y="2" width="61" height="91" rx="6" fill="#1e293b" stroke="#0f172a" stroke-width="2"/>
+        <rect x="8" y="10" width="49" height="18" rx="2" fill="#84cc16" opacity="0.85"/>
+        <text x="12" y="23" font-family="monospace" font-size="9" fill="#14532d">991MS ERROR</text>
+        <circle cx="16" cy="38" r="3" fill="#64748b"/>
+        <circle cx="26" cy="38" r="3" fill="#64748b"/>
+        <circle cx="38" cy="38" r="3" fill="#64748b"/>
+        <circle cx="49" cy="38" r="3" fill="#64748b"/>
+        <rect x="11" y="47" width="9" height="7" rx="1.5" fill="#475569"/>
+        <rect x="23" y="47" width="9" height="7" rx="1.5" fill="#475569"/>
+        <rect x="35" y="47" width="9" height="7" rx="1.5" fill="#475569"/>
+        <rect x="46" y="47" width="9" height="7" rx="1.5" fill="#ea580c"/>
+        <rect x="11" y="59" width="9" height="7" rx="1.5" fill="#475569"/>
+        <rect x="23" y="59" width="9" height="7" rx="1.5" fill="#475569"/>
+        <rect x="35" y="59" width="9" height="7" rx="1.5" fill="#475569"/>
+        <rect x="46" y="59" width="9" height="7" rx="1.5" fill="#475569"/>
+        <rect x="11" y="71" width="9" height="7" rx="1.5" fill="#475569"/>
+        <rect x="23" y="71" width="9" height="7" rx="1.5" fill="#475569"/>
+        <rect x="35" y="71" width="9" height="7" rx="1.5" fill="#475569"/>
+        <rect x="46" y="71" width="9" height="7" rx="1.5" fill="#475569"/>
+        <rect x="11" y="82" width="21" height="7" rx="1.5" fill="#475569"/>
+        <rect x="35" y="82" width="20" height="7" rx="1.5" fill="#3b82f6"/>
+      </svg>
+    </div>
+
+    <div class="desk-decor decor-earphones">
+      <svg viewBox="0 0 90 90" width="80" height="80" fill="none" stroke="#e2e8f0" stroke-width="1.8" opacity="0.6">
+        <path d="M15 15 C 30 50, 60 20, 45 60 C 40 75, 70 80, 80 70"/>
+        <circle cx="15" cy="15" r="4" fill="#cbd5e1" stroke="#94a3b8"/>
+        <circle cx="80" cy="70" r="4" fill="#cbd5e1" stroke="#94a3b8"/>
+      </svg>
+    </div>
+
     <div id="sticky-memo">
       <div class="pushpin"></div>
       <div class="memo-tape"></div>
-      <div class="memo-header">TO-DO LIST</div>
-      <div class="memo-row"><span class="memo-lbl">SCORE:</span> <b id="hud-pts">0</b></div>
-      <div class="memo-row"><span class="memo-lbl">WAVE:</span> <b id="hud-wave">1</b></div>
+      <div class="memo-header">TODAY'S PAIN LIST</div>
+      <div class="memo-row"><span class="memo-lbl">MARKS:</span> <b id="hud-pts">0</b></div>
+      <div class="memo-row"><span class="memo-lbl">SEM WAVE:</span> <b id="hud-wave">1</b></div>
       <div class="memo-row"><span class="memo-lbl">CLUTTER:</span> <b id="clutter-count">0/7</b></div>
+      <div id="clutter-tally" class="memo-tally"></div>
       <div id="clutter-warning" class="memo-status">DESK CLEAR</div>
-      <div class="memo-sanity-wrap">
-        <div class="memo-sanity-label">SANITY</div>
-        <div class="memo-sanity-bar">
-          <div id="sanity-fill" class="sanity-fill" style="width: 100%;"></div>
-        </div>
+    </div>
+
+    <div id="sanity-mug-wrap" title="Sanity Chai Glass">
+      <div class="chai-steam">
+        <span class="steam-wisp wisp-1">~</span>
+        <span class="steam-wisp wisp-2">~</span>
       </div>
+      <div class="chai-glass">
+        <div id="sanity-fill" class="chai-liquid" style="height: 100%;"></div>
+        <div class="chai-ribs"></div>
+      </div>
+      <div class="chai-label">SANITY</div>
+    </div>
+
+    <div id="combo-hud">
+      <div id="combo-text">COMBO x1</div>
     </div>
 
     <div id="desk-controls">
@@ -115,36 +171,51 @@
 
     <div id="arena">
       <div id="flash"></div>
+      <div id="debris-layer"></div>
       <div id="wave-announcer">
         <h3 id="wa-title">WAVE 1</h3>
-        <p id="wa-desc">GET READY</p>
+        <p id="wa-desc">INTERNAL ASSIGNMENTS</p>
       </div>
-      <div class="blotter-mat-watermark">BURNOUT • STUDY DESK ARENA</div>
+      <div class="blotter-mat-watermark">ENGINEERING STUDY ARENA • CS-2026</div>
     </div>
 
     <div id="weapon-tray">
-      <div class="tray-label">TOOLS</div>
+      <div class="tray-label">DESK TOOLS</div>
       <div class="tray-tools">
         <button class="tray-tool active" data-w="hammer" title="Hammer [1]">
           <span class="tool-key">1</span>
-          <svg class="tool-icon" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18l14-14m-12 10l-4 4 2 2 4-4m-2-12l4-4 8 8-4 4-8-8z"/></svg>
+          <svg class="tool-illu" viewBox="0 0 36 36" width="32" height="32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="14" x2="9" y2="29" stroke="#b45309" stroke-width="4.5"/>
+            <rect x="18" y="6" width="14" height="9" rx="2" fill="#64748b" stroke="#334155" stroke-width="2"/>
+            <polygon points="18,7 13,5 13,10" fill="#475569"/>
+          </svg>
           <span class="tool-name">Hammer</span>
         </button>
+
         <button class="tray-tool" data-w="bat" title="Bat [2]">
           <span class="tool-key">2</span>
-          <svg class="tool-icon" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M26 6l-18 18-3-1 1-3 18-18 2 4z"/><path d="M6 25l-2 2 1 1 2-2"/></svg>
+          <svg class="tool-illu" viewBox="0 0 36 36" width="32" height="32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M28 6 L12 26 L8 24 L24 4 Z" fill="#d97706" stroke="#92400e" stroke-width="2"/>
+            <line x1="12" y1="26" x2="7" y2="31" stroke="#f87171" stroke-width="4"/>
+            <circle cx="6" cy="32" r="1.5" fill="#ef4444"/>
+          </svg>
           <span class="tool-name">Bat</span>
         </button>
+
         <button class="tray-tool" data-w="bomb" title="Bomb [3]">
           <span class="tool-key">3</span>
-          <svg class="tool-icon" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="18" r="9"/><path d="M20 11l3-3m-1 0c2-1 4 0 5-1"/><circle cx="28" cy="6" r="1.5" fill="#d97706" stroke="none"/></svg>
+          <svg class="tool-illu" viewBox="0 0 36 36" width="32" height="32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="16" cy="20" r="11" fill="#1e293b" stroke="#0f172a" stroke-width="2"/>
+            <circle cx="13" cy="16" r="2.5" fill="#fff" opacity="0.5"/>
+            <path d="M22 12 C 24 8, 28 8, 30 5" stroke="#78350f" stroke-width="2.5"/>
+            <circle cx="30" cy="5" r="2.5" fill="#f59e0b"/>
+            <line x1="30" y1="3" x2="32" y2="1" stroke="#ef4444" stroke-width="2"/>
+          </svg>
           <span class="tool-name">Bomb</span>
           <span id="hud-bombs" class="tray-tape-badge">3</span>
         </button>
       </div>
     </div>
-
-    <div class="desk-mat-credit">Made by Aadarsh Jain</div>
   </main>
 
   <script src="js/config.js"></script>
