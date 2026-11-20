@@ -10,7 +10,7 @@ const State = {
   
   pts: 0,
   smashed: 0,
-  sanity: 100,
+  overflowTimer: 0,
   rage: 0,
   rageActive: false,
   rageTimer: null,
@@ -27,7 +27,6 @@ const State = {
   shakeFactor: 1,
   
   spawnInterval: null,
-  sanityInterval: null,
   tickInterval: null,
   
   highScore: 0

@@ -90,18 +90,6 @@
   100% { transform: scale(1.02); }
 }
 
-@keyframes steam-rise {
-  0% { transform: translate3d(0, 0, 0) scale(0.9); opacity: 0.3; }
-  100% { transform: translate3d(0, -6px, 0) scale(1.2); opacity: 0.8; }
-}
-
-@keyframes mug-panic {
-  0% { transform: translate3d(0, 0, 0) rotate(0deg); }
-  25% { transform: translate3d(-2px, 1px, 0) rotate(-3deg); }
-  75% { transform: translate3d(2px, -1px, 0) rotate(3deg); }
-  100% { transform: translate3d(0, 0, 0) rotate(0deg); }
-}
-
 @keyframes combo-wobble {
   0% { transform: rotate(0deg) scale(0.8); }
   50% { transform: rotate(8deg) scale(1.3); }

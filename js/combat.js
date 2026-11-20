@@ -175,8 +175,6 @@ function destroyEnemy(t, x, y) {
   addPoints(earned);
   spawnScorePopup(x, y, earned);
 
-  updateSanity(isBoss ? 35 : 10);
-
   if (Math.random() < 0.22 || isBoss) {
     spawnPowerupDrop(x, y);
   }
@@ -244,25 +242,4 @@ function activateRageMode(duration = 6000) {
     State.rageActive = false;
     State.rage = 0;
   }, duration);
-}
-
-function updateSanity(delta) {
-  State.sanity = Math.max(0, Math.min(100, State.sanity + delta));
-  const fill = $('sanity-fill');
-  const mugWrap = $('sanity-mug-wrap');
-  
-  if (fill) {
-    fill.style.height = State.sanity + '%';
-    if (State.sanity < 25) {
-      fill.classList.add('low');
-      if (mugWrap) mugWrap.classList.add('shake-panic');
-    } else {
-      fill.classList.remove('low');
-      if (mugWrap) mugWrap.classList.remove('shake-panic');
-    }
-  }
-
-  if (State.sanity <= 0) {
-    triggerGameOver('BURNOUT');
-  }
 }

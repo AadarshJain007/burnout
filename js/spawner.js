@@ -161,7 +161,7 @@ function spawnPowerupDrop(x, y) {
   const types = [
     { type: 'bomb', iconHtml: '<svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="14" cy="18" r="9"/><path d="M20 11l3-3"/></svg>', label: '+2 BOMBS' },
     { type: 'chai', iconHtml: '<svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 12 L10 26 L22 26 L24 12 Z" fill="#fed7aa"/><line x1="7" y1="12" x2="25" y2="12"/></svg>', label: 'CUTTING CHAI RUSH!' },
-    { type: 'peace', iconHtml: '<svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="16" cy="16" r="10"/><line x1="16" y1="6" x2="16" y2="26"/><line x1="6" y1="16" x2="26" y2="16"/></svg>', label: '+30 SANITY' },
+    { type: 'clean', iconHtml: '<svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 24 L26 4 L28 6 L8 26 Z" fill="#bbf7d0"/><path d="M6 24 L3 29 L8 26 Z"/></svg>', label: 'DESK CLEANED! (-2 PAPERS)' },
     { type: 'wipe', iconHtml: '<svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="#dc2626" stroke-width="2.6"><line x1="8" y1="8" x2="24" y2="24"/><line x1="24" y1="8" x2="8" y2="24"/></svg>', label: 'HOLIDAY ANNOUNCED!' }
   ];
   const item = types[Math.floor(Math.random() * types.length)];
@@ -192,8 +192,13 @@ function applyPowerupEffect(type, label) {
     updateBombHud();
   } else if (type === 'chai') {
     activateRageMode(5000);
-  } else if (type === 'peace') {
-    updateSanity(30);
+  } else if (type === 'clean') {
+    const targets = [...arenaEl.querySelectorAll('.t:not(.boss)')].slice(0, 2);
+    targets.forEach(t => {
+      const tx = parseFloat(t.style.left) || 0;
+      const ty = parseFloat(t.style.top) || 0;
+      destroyEnemy(t, tx, ty);
+    });
   } else if (type === 'wipe') {
     const targets = arenaEl.querySelectorAll('.t:not(.boss)');
     targets.forEach(t => {

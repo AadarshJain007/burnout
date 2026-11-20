@@ -20,8 +20,13 @@ function updateClutterHud() {
   }
 
   if (warningEl) {
-    if (count >= 5) {
-      warningEl.textContent = 'DESK OVERFLOWING!';
+    if (count >= 7) {
+      const left = Math.max(0, 5 - (State.overflowTimer || 0));
+      warningEl.textContent = `OVERFLOW IN ${left}s!`;
+      warningEl.className = 'memo-status danger';
+      if (memoEl) memoEl.classList.add('tremble');
+    } else if (count >= 5) {
+      warningEl.textContent = 'DESK CLUTTERED!';
       warningEl.className = 'memo-status danger';
       if (memoEl) memoEl.classList.add('tremble');
     } else {
@@ -119,11 +124,10 @@ function triggerVictoryScreen() {
 function triggerGameOver(reasonTitle) {
   State.running = false;
   clearInterval(State.spawnInterval);
-  clearInterval(State.sanityInterval);
   clearInterval(State.tickInterval);
 
   $('gameover-modal').classList.add('open');
-  $('go-title').innerHTML = `${reasonTitle || 'YEAR BACK!'} <span>OVERFLOW</span>`;
+  $('go-title').innerHTML = `${reasonTitle || 'DESK'} <span>OVERFLOW</span>`;
   
   const goStamp = $('go-stamp');
   if (goStamp) {
@@ -148,7 +152,7 @@ function startGame(mode = 'campaign') {
   State.mode = mode;
   State.pts = 0;
   State.smashed = 0;
-  State.sanity = 100;
+  State.overflowTimer = 0;
   State.rage = 0;
   State.combo = 0;
   State.bombs = 3;
@@ -156,7 +160,6 @@ function startGame(mode = 'campaign') {
   
   $('hud-pts').textContent = '0';
   updateBombHud();
-  updateSanity(0);
   
   arenaEl.querySelectorAll('.t, .powerup, .shard, .fl, .ring, .slash-fx').forEach(el => el.remove());
   const debris = $('debris-layer');
@@ -177,19 +180,22 @@ function startGame(mode = 'campaign') {
     updateClutterHud();
   }, 1900);
 
-  clearInterval(State.sanityInterval);
-  State.sanityInterval = setInterval(() => {
-    if (!State.running || State.paused) return;
-    const activeTargets = arenaEl.querySelectorAll('.t:not(.boss)').length;
-    if (activeTargets >= 5) {
-      updateSanity(-3);
-      spawnComicWord(arenaEl.clientWidth / 2, 40, 'DESK CLUTTERED! -3 SANITY');
-    }
-  }, 2200);
-
   clearInterval(State.tickInterval);
   State.tickInterval = setInterval(() => {
     if (!State.running || State.paused) return;
+    
+    const count = arenaEl.querySelectorAll('.t:not(.boss)').length;
+    if (count >= 7) {
+      State.overflowTimer = (State.overflowTimer || 0) + 1;
+      updateClutterHud();
+      if (State.overflowTimer >= 5) {
+        triggerGameOver('DESK OVERFLOW');
+        return;
+      }
+    } else {
+      State.overflowTimer = 0;
+    }
+
     arenaEl.querySelectorAll('.t.type-deadline').forEach(d => {
       let timeLeft = +(d.dataset.timer || 8) - 1;
       d.dataset.timer = timeLeft;
@@ -200,10 +206,11 @@ function startGame(mode = 'campaign') {
       if (timeLeft <= 0) {
         const tx = parseFloat(d.style.left) || 0;
         const ty = parseFloat(d.style.top) || 0;
-        spawnComicWord(tx + 80, ty + 60, 'SUBMISSION MISSED! -20 SANITY');
+        spawnComicWord(tx + 80, ty + 60, 'DEADLINE MISSED! +2 PAPERS');
         triggerScreenShake(8);
-        updateSanity(-20);
         d.remove();
+        spawnRandomEnemy();
+        spawnRandomEnemy();
         updateClutterHud();
       }
     });
