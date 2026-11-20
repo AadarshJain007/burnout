@@ -45,16 +45,16 @@ function startWave(num) {
   const hudWave = $('hud-wave');
   if (hudWave) hudWave.textContent = num;
 
-  const waveTitles = ['WAVE 1', 'WAVE 2', 'WAVE 3', 'WAVE 4', 'WAVE 5'];
+  const waveTitles = ['TERM 1', 'TERM 2', 'TERM 3', 'TERM 4', 'FINAL TERM'];
   const waveDescs = [
-    'INTERNAL ASSIGNMENTS',
-    'MID-SEM EXAM CRISIS',
-    'PRACTICAL LAB VIVA',
-    'END-SEM MARATHON',
-    'CAMPUS PLACEMENT WAR'
+    'SURPRISE UNIT TESTS',
+    'HALF-YEARLY EXAMS',
+    'PRACTICAL LAB EXAMS',
+    'PRE-BOARD MARATHON',
+    '12TH BOARD EXAMS'
   ];
-  const title = waveTitles[num - 1] || `SEM WAVE ${num}`;
-  const desc = waveDescs[num - 1] || 'SMASH ALL CLUTTER';
+  const title = waveTitles[num - 1] || `TERM ${num}`;
+  const desc = waveDescs[num - 1] || 'SMASH ALL PAPERS';
 
   const banner = $('wave-announcer');
   if (banner) {
@@ -80,7 +80,7 @@ function triggerBossEncounter() {
 
   const banner = $('wave-announcer');
   if (banner) {
-    $('wa-title').textContent = 'FACULTY INCOMING!';
+    $('wa-title').textContent = 'TEACHER INCOMING!';
     $('wa-desc').textContent = bossData.name;
     banner.classList.add('active');
     setTimeout(() => banner.classList.remove('active'), 2000);
@@ -106,7 +106,7 @@ function handleBossDefeat() {
 function triggerVictoryScreen() {
   State.running = false;
   $('gameover-modal').classList.add('open');
-  $('go-title').innerHTML = 'DEGREE CLEARED! <span>GRADUATED</span>';
+  $('go-title').innerHTML = 'EXAMS CLEARED! <span>GRADUATED 12TH</span>';
   
   const goStamp = $('go-stamp');
   if (goStamp) {
@@ -115,7 +115,7 @@ function triggerVictoryScreen() {
   }
 
   $('go-score').textContent = State.pts;
-  $('go-wave').textContent = '5 (PASSED)';
+  $('go-wave').textContent = '12TH (PASSED)';
   $('go-smashed').textContent = State.smashed;
   $('go-combo').textContent = `x${State.highestCombo}`;
   saveHighScore();
@@ -127,11 +127,11 @@ function triggerGameOver(reasonTitle) {
   clearInterval(State.tickInterval);
 
   $('gameover-modal').classList.add('open');
-  $('go-title').innerHTML = `${reasonTitle || 'DESK'} <span>OVERFLOW</span>`;
+  $('go-title').innerHTML = `${reasonTitle || 'FAILED!'} <span>DETENTION</span>`;
   
   const goStamp = $('go-stamp');
   if (goStamp) {
-    goStamp.textContent = 'DE-BARRED';
+    goStamp.textContent = 'REPEAT';
     goStamp.className = 'folder-stamp-red';
   }
 
@@ -206,7 +206,7 @@ function startGame(mode = 'campaign') {
       if (timeLeft <= 0) {
         const tx = parseFloat(d.style.left) || 0;
         const ty = parseFloat(d.style.top) || 0;
-        spawnComicWord(tx + 80, ty + 60, 'DEADLINE MISSED! +2 PAPERS');
+        spawnComicWord(tx + 80, ty + 60, 'SUBMISSION MISSED! +2 PAPERS');
         triggerScreenShake(8);
         d.remove();
         spawnRandomEnemy();

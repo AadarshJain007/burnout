@@ -6,19 +6,18 @@ const DOODLES = {
   sweat: '<svg viewBox="0 0 36 36" width="30" height="30" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round"><circle cx="17" cy="19" r="11"/><circle cx="13" cy="17" r="1.5" fill="#0284c7"/><circle cx="21" cy="17" r="1.5" fill="#0284c7"/><path d="M14 24 Q17 21 20 24"/><path d="M26 10 C26 7, 30 5, 30 8 C30 12, 26 13, 26 10 Z" fill="#38bdf8"/></svg>',
   highlighter: '<svg viewBox="0 0 36 36" width="30" height="30" fill="none" stroke="#ca8a04" stroke-width="2" stroke-linecap="round"><rect x="10" y="10" width="16" height="18" rx="2" fill="#fef08a"/><polygon points="12,10 18,3 24,10" fill="#ca8a04"/></svg>',
   clock: '<svg viewBox="0 0 36 36" width="30" height="30" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round"><circle cx="18" cy="18" r="12"/><line x1="18" y1="18" x2="18" y2="10"/><line x1="18" y1="18" x2="24" y2="20"/><path d="M8 8 L12 5 M28 8 L24 5"/></svg>',
-  chai: '<svg viewBox="0 0 36 36" width="30" height="30" fill="none" stroke="#78350f" stroke-width="2" stroke-linecap="round"><path d="M9 12 L12 30 L24 30 L27 12 Z" fill="#fed7aa"/><path d="M13 8 Q14 4 15 2 M18 8 Q19 4 20 2 M23 8 Q24 4 25 2"/><line x1="8" y1="12" x2="28" y2="12"/></svg>',
   cross: '<svg viewBox="0 0 36 36" width="30" height="30" fill="none" stroke="#dc2626" stroke-width="3" stroke-linecap="round"><line x1="9" y1="9" x2="27" y2="27"/><line x1="27" y1="9" x2="9" y2="27"/></svg>',
   alert: '<svg viewBox="0 0 36 36" width="30" height="30" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round"><circle cx="18" cy="18" r="13"/><path d="M18 10 L18 20"/><circle cx="18" cy="24" r="1.5" fill="#dc2626"/></svg>',
-  bug: '<svg viewBox="0 0 36 36" width="30" height="30" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round"><ellipse cx="18" cy="19" rx="7" ry="9" fill="#ddd6fe"/><line x1="18" y1="10" x2="18" y2="28"/><line x1="8" y1="14" x2="12" y2="16"/><line x1="28" y1="14" x2="24" y2="16"/><line x1="7" y1="20" x2="11" y2="20"/><line x1="29" y1="20" x2="25" y2="20"/><line x1="8" y1="26" x2="12" y2="24"/><line x1="28" y1="26" x2="24" y2="24"/></svg>',
-  snake: '<svg viewBox="0 0 36 36" width="30" height="30" fill="none" stroke="#15803d" stroke-width="2.2" stroke-linecap="round"><path d="M10 28 C12 20, 22 28, 24 18 C26 9, 14 10, 14 6"/><circle cx="14" cy="5" r="1.5" fill="#15803d"/></svg>',
+  star: '<svg viewBox="0 0 36 36" width="30" height="30" fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round"><polygon points="18,3 22,13 33,14 24,21 27,32 18,25 9,32 12,21 3,14 14,13" fill="#fef08a"/></svg>',
+  calculator: '<svg viewBox="0 0 36 36" width="30" height="30" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="round"><rect x="8" y="5" width="20" height="26" rx="3"/><line x1="12" y1="10" x2="24" y2="10"/><circle cx="13" cy="16" r="1.5"/><circle cx="18" cy="16" r="1.5"/><circle cx="23" cy="16" r="1.5"/><circle cx="13" cy="21" r="1.5"/><circle cx="18" cy="21" r="1.5"/><circle cx="23" cy="21" r="1.5"/></svg>',
   boss: '<svg viewBox="0 0 40 40" width="36" height="36" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round"><circle cx="20" cy="20" r="15"/><line x1="13" y1="15" x2="17" y2="17"/><line x1="27" y1="15" x2="23" y2="17"/><circle cx="15" cy="19" r="1.5" fill="#dc2626"/><circle cx="25" cy="19" r="1.5" fill="#dc2626"/><path d="M14 27 Q20 22 26 27"/></svg>'
 };
 
 const ITEMS = [
   {
     paperType: 'attendance',
-    name: '74.2% Attendance',
-    sub: 'HOD: "Rules are rules beta, see you in summer sem."',
+    name: '75% Minimum Attendance Notice',
+    sub: 'Principal: "You missed 4 days with fever. Bring parents to school tomorrow."',
     stamp: 'DE-BARRED',
     hp: 2,
     pts: 200,
@@ -26,17 +25,17 @@ const ITEMS = [
   },
   {
     paperType: 'exam',
-    name: 'End-Sem Paper (Out of Syllabus)',
-    sub: 'Question 1: Derive entire universe. 40 students staring at ceiling fan.',
-    stamp: '0 / 50',
+    name: '12th Board Physics Paper',
+    sub: 'Question 4: Derive entire electromagnetism for 3 marks. Everyone staring at ceiling.',
+    stamp: 'GRADE F',
     hp: 4,
     pts: 450,
     doodle: 'skull'
   },
   {
     paperType: 'notebook',
-    name: 'Practical File Submission',
-    sub: '120 pages handwritten overnight just for 1 red tick mark in 2 seconds.',
+    name: 'Chemistry Practical Record',
+    sub: 'Copied 70 pages from the topper during lunch break just for one red signature.',
     stamp: 'RE-WRITE',
     hp: 3,
     pts: 280,
@@ -44,36 +43,36 @@ const ITEMS = [
   },
   {
     paperType: 'tuition',
-    name: 'Semester Fee Fine',
-    sub: 'Pay ₹65,000 + ₹2,000 late fee or portal blocks your admit card.',
-    stamp: 'OVERDUE',
+    name: 'Coaching Institute Test Series',
+    sub: 'Sunday 6 AM mock exam. Scored 14 out of 300 in Organic Chemistry.',
+    stamp: 'RANK 482',
     hp: 3,
     pts: 320,
-    doodle: 'rupee'
+    doodle: 'calculator'
   },
   {
     paperType: 'sticky',
-    name: 'Viva with External Examiner',
-    sub: '"Tell me difference between Java and JavaScript" *sweating starts*',
-    stamp: 'VIVA FAIL',
+    name: 'Diary Note for Parents',
+    sub: 'Teacher: "Your child was found staring out the classroom window during Calculus."',
+    stamp: 'SIGN HERE',
     hp: 2,
     pts: 220,
     doodle: 'sweat'
   },
   {
     paperType: 'syllabus',
-    name: 'Xerox Notes (Module 5)',
-    sub: 'Photocopy wala charged ₹40. Entire chapter is font size 5 blurred.',
-    stamp: 'UNREAD',
+    name: 'Maths Sample Question Paper',
+    sub: 'Problem 1: "Find x". I can not even find the motivation to turn page 2.',
+    stamp: 'UNSOLVED',
     hp: 3,
     pts: 260,
     doodle: 'highlighter'
   },
   {
     paperType: 'sticky',
-    name: '8 AM Lab Proxy Caught',
-    sub: 'Attempted proxy for roommate. Both got marked absent + HOD called.',
-    stamp: 'CAUGHT',
+    name: 'Surprise Morning Unit Test',
+    sub: '"Close all notebooks and keep bags outside. 20 algebra questions in 15 minutes."',
+    stamp: 'POP QUIZ',
     hp: 2,
     pts: 240,
     type: 'deadline',
@@ -82,94 +81,94 @@ const ITEMS = [
   },
   {
     paperType: 'notebook',
-    name: 'Hostel Mess Menu',
-    sub: 'Monday aloo, Tuesday aloo matar, Wednesday existential dread.',
-    stamp: 'UNCOOKED',
+    name: 'Biology Diagram Homework',
+    sub: 'Spent 3 hours drawing human heart with gel pen. Teacher wrote "Untidy" across page.',
+    stamp: 'RE-DRAW',
     hp: 2,
     pts: 180,
-    doodle: 'chai'
-  },
-  {
-    paperType: 'exam',
-    name: 'Backlog Registration Form',
-    sub: '₹1,500 per subject. "Bhai re-evaluation bhar de pakka nikal jayega."',
-    stamp: 'REPEAT',
-    hp: 3,
-    pts: 350,
     doodle: 'cross'
   },
   {
-    paperType: 'tuition',
-    name: 'Scholarship Portal Timeout',
-    sub: 'Government portal crashed at 11:59 PM. Bye bye ₹25,000 reimbursement.',
-    stamp: 'REJECTED',
+    paperType: 'exam',
+    name: 'Pre-Board Result Sheet',
+    sub: 'Passed English, failed Physics and Maths. Currently hiding paper under mattress.',
+    stamp: 'DETENTION',
     hp: 3,
-    pts: 300,
+    pts: 350,
     doodle: 'alert'
   },
   {
+    paperType: 'tuition',
+    name: 'Tuition Center Homework Sheet',
+    sub: '60 trigonometry proofs due by 5 PM. Brain currently operating at 2% capacity.',
+    stamp: 'OVERDUE',
+    hp: 3,
+    pts: 300,
+    doodle: 'calculator'
+  },
+  {
     paperType: 'syllabus',
-    name: 'B.Tech Final Year Project',
-    sub: 'Copied from 2017 GitHub repo. Praying it compiles on professor laptop.',
-    stamp: 'BUGGY',
+    name: 'Science Exhibition Project Model',
+    sub: 'Volcano model made at 3 AM using cardboard, baking soda, and red watercolor.',
+    stamp: 'COLLAPSED',
     hp: 4,
     pts: 400,
-    doodle: 'bug'
+    doodle: 'alert'
   },
   {
     paperType: 'sticky',
-    name: 'Topper: "I Haven\'t Studied"',
-    sub: 'Said "bhai I will fail for sure" then scored 9.8 CGPA and top rank.',
-    stamp: '9.8 CGPA',
+    name: 'Class Topper: "I Did Not Study"',
+    sub: 'Claims they slept all night without opening book, then scores 99 out of 100.',
+    stamp: '99 / 100',
     hp: 3,
     pts: 320,
     type: 'dodger',
-    doodle: 'snake'
+    doodle: 'star'
   }
 ];
 
 const BOSSES = [
   {
     paperType: 'exam',
-    name: 'STRICT HOD SUMMONS',
-    sub: '"Your attendance is 61%. Bring your parents tomorrow 9 AM sharp."',
-    stamp: 'SUMMONED',
+    name: 'SURPRISE UNIT TEST',
+    sub: 'No formula sheets allowed. 15 questions in 30 minutes. Solve now.',
+    stamp: 'TIME UP',
     hp: 18,
     pts: 1500,
     wave: 1
   },
   {
     paperType: 'sticky',
-    name: 'THE EXTERNAL VIVA EXAMINER',
-    sub: '"Page 84 open karo. Explain diagram 4.3 without looking at the board."',
-    stamp: 'INTERNAL ZERO',
+    name: 'THE STRICT PRINCIPAL',
+    sub: 'Walking slowly down the corridor with hands behind back, looking into class.',
+    stamp: 'DETENTION',
     hp: 24,
     pts: 2400,
     wave: 2
   },
   {
     paperType: 'tuition',
-    name: 'ACCOUNTS SECTION BABU',
-    sub: '"Lunch time shuru ho gaya. Counter 3 pe jao, wahan bolenge counter 1 pe aao."',
-    stamp: 'COUNTER CLOSED',
+    name: 'PARENT-TEACHER MEETING (PTM)',
+    sub: '"Your child has good potential, but gets distracted and talks constantly in class."',
+    stamp: 'COMPLAINT',
     hp: 32,
     pts: 3400,
     wave: 3
   },
   {
     paperType: 'syllabus',
-    name: 'CAMPUS PLACEMENT CRITERIA',
-    sub: '"Criteria: 90% in 10th, 12th, B.Tech & nursery. Package: 3.2 LPA support role."',
-    stamp: 'NOT ELIGIBLE',
+    name: 'THE PRE-BOARD EXAMS',
+    sub: 'Strict external invigilator tapping pen on desk every 5 seconds.',
+    stamp: 'FAILED',
     hp: 40,
     pts: 4500,
     wave: 4
   },
   {
     paperType: 'exam',
-    name: 'THE RAT RACE (SHARMA JI KA BETA)',
-    sub: '"Sharma ji ke ladke ne 45 LPA ka off-campus crack kar liya. Tum kya kar rahe ho?"',
-    stamp: 'BURNOUT SUPREME',
+    name: '12TH BOARD FINAL EXAM',
+    sub: 'Rolled-up admit card, barcode stickers, seal broken. Answer everything.',
+    stamp: 'BOARD EXAM',
     hp: 55,
     pts: 6000,
     wave: 5
@@ -177,16 +176,16 @@ const BOSSES = [
 ];
 
 const RANKS = [
-  [0, 'First Year Fresher'],
-  [300, 'Attendance Defaulter'],
-  [800, 'Backlog Warrior'],
-  [1600, 'Proxy Master'],
-  [3000, 'One-Night Study Legend'],
-  [5000, 'Placement Survivor'],
-  [8000, 'Degree Holder (Freedom)']
+  [0, 'Backbencher'],
+  [300, 'Average Student'],
+  [800, 'Crammer'],
+  [1600, 'Coaching Survivor'],
+  [3000, 'Honor Roll Contender'],
+  [5000, 'Class Topper'],
+  [8000, 'Board Exam Legend']
 ];
 
-const WORDS = ['SMASHED!', 'DHO DAALA!', 'KHATAM!', 'FATAK!', 'DEBARRED!', 'BYE BYE!', 'PASSED!', 'CLEARED!'];
+const WORDS = ['SMASHED!', 'CRUSHED!', 'CANCELLED!', 'PASSED!', 'NO HOMEWORK!', 'ACE!', 'BOOM!', 'FREEDOM!'];
 
 const WEAPONS = {
   hammer: {

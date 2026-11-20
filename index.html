@@ -20,16 +20,16 @@
 
   <div id="intro-modal" class="overlay open">
     <div class="manilla-folder">
-      <div class="folder-tab">FILE #2026: ACADEMIC BURNOUT</div>
+      <div class="folder-tab">FILE: HIGH SCHOOL BURNOUT</div>
       <div class="folder-content">
         <div class="coffee-stain"></div>
-        <div class="folder-stamp-red">DE-BARRED NOTICE</div>
-        <h2>SEMESTER END<br><span>BURNOUT</span></h2>
+        <div class="folder-stamp-red">BOARD EXAM NOTICE</div>
+        <h2>12TH GRADE<br><span>BURNOUT</span></h2>
         <p class="tagline">
-          74% attendance, backlog forms, viva with externals, and hostel mess notices are burying your study desk.
+          Board exams, surprise unit tests, coaching test sheets, and practical records are piling up on your study desk.
         </p>
         <p class="folder-directive">
-          ASSIGNMENT: Grab the hammer, cricket bat, or bomb on your desk and smash every paper before your desk overflows.
+          ASSIGNMENT: Grab a hammer, cricket bat, or bomb from your desk and smash every paper before your desk overflows.
         </p>
         <div class="stamp-action">
           <button id="btn-start-game" class="stamp-btn">START SMASHING</button>
@@ -41,14 +41,14 @@
 
   <div id="pause-modal" class="overlay">
     <div class="manilla-folder">
-      <div class="folder-tab">STUDY BREAK</div>
+      <div class="folder-tab">RECESS BREAK</div>
       <div class="folder-content">
         <div class="folder-stamp-blue">PAUSED</div>
-        <h2>VIVA <span>SUSPENDED</span></h2>
-        <p class="tagline">Taking a 5-minute chai break. The pile will be waiting when you return.</p>
+        <h2>STUDY SESSION <span>PAUSED</span></h2>
+        <p class="tagline">Taking a quick recess. The exam pile is still waiting on your desk.</p>
         <div class="stamp-action-row">
           <button id="btn-resume" class="stamp-btn stamp-sm">RESUME STUDY</button>
-          <button id="btn-pause-restart" class="stamp-btn stamp-sm stamp-sub">RESTART SEM</button>
+          <button id="btn-pause-restart" class="stamp-btn stamp-sm stamp-sub">RESTART TERM</button>
           <button id="btn-pause-menu" class="stamp-btn stamp-sm stamp-sub">DESK MENU</button>
         </div>
       </div>
@@ -57,9 +57,9 @@
 
   <div id="gameover-modal" class="overlay">
     <div class="manilla-folder">
-      <div class="folder-tab">FINAL GRADE SHEET</div>
+      <div class="folder-tab">FINAL REPORT CARD</div>
       <div class="folder-content">
-        <div id="go-stamp" class="folder-stamp-red">YEAR BACK</div>
+        <div id="go-stamp" class="folder-stamp-red">DETENTION</div>
         <h2 id="go-title">DESK <span>OVERFLOW</span></h2>
         
         <div class="stats-box">
@@ -68,7 +68,7 @@
             <div id="go-score" class="val val-red">0</div>
           </div>
           <div>
-            <span class="label">WAVE</span>
+            <span class="label">TERM</span>
             <div id="go-wave" class="val val-yellow">1</div>
           </div>
           <div>
@@ -82,7 +82,7 @@
         </div>
 
         <div class="stamp-action-row" style="margin-top: 18px;">
-          <button id="btn-restart" class="stamp-btn stamp-sm">RE-APPEAR IN EXAM</button>
+          <button id="btn-restart" class="stamp-btn stamp-sm">RE-TAKE EXAMS</button>
           <button id="btn-go-menu" class="stamp-btn stamp-sm stamp-sub">DESK MENU</button>
         </div>
 
@@ -107,7 +107,7 @@
       <svg viewBox="0 0 65 95" width="55" height="80">
         <rect x="2" y="2" width="61" height="91" rx="6" fill="#1e293b" stroke="#0f172a" stroke-width="2"/>
         <rect x="8" y="10" width="49" height="18" rx="2" fill="#84cc16" opacity="0.85"/>
-        <text x="12" y="23" font-family="monospace" font-size="9" fill="#14532d">991MS ERROR</text>
+        <text x="12" y="23" font-family="monospace" font-size="9" fill="#14532d">SYNTAX ERROR</text>
         <circle cx="16" cy="38" r="3" fill="#64748b"/>
         <circle cx="26" cy="38" r="3" fill="#64748b"/>
         <circle cx="38" cy="38" r="3" fill="#64748b"/>
@@ -140,10 +140,10 @@
     <div id="sticky-memo">
       <div class="pushpin"></div>
       <div class="memo-tape"></div>
-      <div class="memo-header">TODAY'S PAIN LIST</div>
+      <div class="memo-header">DAILY HOMEWORK</div>
       <div class="memo-row"><span class="memo-lbl">MARKS:</span> <b id="hud-pts">0</b></div>
-      <div class="memo-row"><span class="memo-lbl">SEM WAVE:</span> <b id="hud-wave">1</b></div>
-      <div class="memo-row"><span class="memo-lbl">CLUTTER:</span> <b id="clutter-count">0/7</b></div>
+      <div class="memo-row"><span class="memo-lbl">TERM:</span> <b id="hud-wave">1</b></div>
+      <div class="memo-row"><span class="memo-lbl">PAPERS:</span> <b id="clutter-count">0/7</b></div>
       <div id="clutter-tally" class="memo-tally"></div>
       <div id="clutter-warning" class="memo-status">DESK CLEAR</div>
     </div>
@@ -161,10 +161,10 @@
       <div id="flash"></div>
       <div id="debris-layer"></div>
       <div id="wave-announcer">
-        <h3 id="wa-title">WAVE 1</h3>
-        <p id="wa-desc">INTERNAL ASSIGNMENTS</p>
+        <h3 id="wa-title">TERM 1</h3>
+        <p id="wa-desc">SURPRISE UNIT TESTS</p>
       </div>
-      <div class="blotter-mat-watermark">ENGINEERING STUDY ARENA • CS-2026</div>
+      <div class="blotter-mat-watermark">HIGH SCHOOL STUDY DESK • CLASS OF 2026</div>
     </div>
 
     <div id="weapon-tray">

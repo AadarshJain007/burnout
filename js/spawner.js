@@ -81,7 +81,7 @@ function spawnEnemy(data, isBoss = false) {
 
   const doodleSvg = (data.doodle && typeof DOODLES !== 'undefined' && DOODLES[data.doodle]) ? DOODLES[data.doodle] : (DOODLES.warning || '');
   const stampText = data.stamp || (isBoss ? 'URGENT' : 'NOTICE');
-  const examHeader = (data.paperType === 'exam' && !isBoss) ? '<div class="card-top-tag">END-SEM CODE: CS2026</div>' : '';
+  const examHeader = (data.paperType === 'exam' && !isBoss) ? '<div class="card-top-tag">12TH BOARD • CODE 2026</div>' : '';
 
   t.innerHTML = `
     ${examHeader}
@@ -116,7 +116,7 @@ function initDodgerBehavior(t) {
     t.style.transition = 'left 0.18s ease-out, top 0.18s ease-out';
     t.style.left = pos.x + 'px';
     t.style.top = pos.y + 'px';
-    spawnComicWord(pos.x + 80, pos.y, 'PROXY DODGE!');
+    spawnComicWord(pos.x + 80, pos.y, 'DODGED!');
   });
 }
 
@@ -128,7 +128,7 @@ function paintHP(t) {
   const tallyEl = t.querySelector('.card-hp-tally');
   if (tallyEl) {
     if (isBoss) {
-      tallyEl.textContent = `VIVA HP: ${hp}`;
+      tallyEl.textContent = `EXAM HP: ${hp}`;
     } else {
       let marks = '';
       for (let i = 0; i < max; i++) {
@@ -160,9 +160,9 @@ function spawnPowerupDrop(x, y) {
   const arenaEl = $('arena');
   const types = [
     { type: 'bomb', iconHtml: '<svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="14" cy="18" r="9"/><path d="M20 11l3-3"/></svg>', label: '+2 BOMBS' },
-    { type: 'chai', iconHtml: '<svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 12 L10 26 L22 26 L24 12 Z" fill="#fed7aa"/><line x1="7" y1="12" x2="25" y2="12"/></svg>', label: 'CUTTING CHAI RUSH!' },
+    { type: 'energy', iconHtml: '<svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 12 L10 26 L22 26 L24 12 Z" fill="#fed7aa"/><line x1="7" y1="12" x2="25" y2="12"/></svg>', label: 'ENERGY BOOST!' },
     { type: 'clean', iconHtml: '<svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 24 L26 4 L28 6 L8 26 Z" fill="#bbf7d0"/><path d="M6 24 L3 29 L8 26 Z"/></svg>', label: 'DESK CLEANED! (-2 PAPERS)' },
-    { type: 'wipe', iconHtml: '<svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="#dc2626" stroke-width="2.6"><line x1="8" y1="8" x2="24" y2="24"/><line x1="24" y1="8" x2="8" y2="24"/></svg>', label: 'HOLIDAY ANNOUNCED!' }
+    { type: 'wipe', iconHtml: '<svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="#dc2626" stroke-width="2.6"><line x1="8" y1="8" x2="24" y2="24"/><line x1="24" y1="8" x2="8" y2="24"/></svg>', label: 'SCHOOL HOLIDAY!' }
   ];
   const item = types[Math.floor(Math.random() * types.length)];
   
@@ -190,7 +190,7 @@ function applyPowerupEffect(type, label) {
   if (type === 'bomb') {
     State.bombs += 2;
     updateBombHud();
-  } else if (type === 'chai') {
+  } else if (type === 'energy') {
     activateRageMode(5000);
   } else if (type === 'clean') {
     const targets = [...arenaEl.querySelectorAll('.t:not(.boss)')].slice(0, 2);

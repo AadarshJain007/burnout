@@ -168,8 +168,8 @@ function destroyEnemy(t, x, y) {
   State.smashed++;
   
   spawnBurst(x, y, isBoss ? 20 : 12);
-  const words = ['SMASHED!', 'DHO DAALA!', 'KHATAM!', 'PASSED!'];
-  spawnComicWord(x, y, isBoss ? 'VIVA CLEARED!' : words[Math.floor(Math.random() * words.length)]);
+  const words = ['SMASHED!', 'CRUSHED!', 'CANCELLED!', 'PASSED!'];
+  spawnComicWord(x, y, isBoss ? 'EXAM CLEARED!' : words[Math.floor(Math.random() * words.length)]);
 
   const earned = Math.round(basePts * getComboMultiplier() * (isBoss ? 2 : 1));
   addPoints(earned);
