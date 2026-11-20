@@ -16,9 +16,9 @@ const DOODLES = {
 const ITEMS = [
   {
     paperType: 'attendance',
-    name: '75% Minimum Attendance Notice',
-    sub: 'Principal: "You missed 4 days with fever. Bring parents to school tomorrow."',
-    stamp: 'DE-BARRED',
+    name: '75% Attendance Warning',
+    sub: 'Attendance dropped to 68%. Parents summoned to principal office.',
+    stamp: 'SHORTAGE',
     hp: 2,
     pts: 200,
     doodle: 'warning'
@@ -26,8 +26,8 @@ const ITEMS = [
   {
     paperType: 'exam',
     name: '12th Board Physics Paper',
-    sub: 'Question 4: Derive entire electromagnetism for 3 marks. Everyone staring at ceiling.',
-    stamp: 'GRADE F',
+    sub: 'Section C has 5-mark derivations and nobody studied ray optics.',
+    stamp: 'FAIL',
     hp: 4,
     pts: 450,
     doodle: 'skull'
@@ -35,7 +35,7 @@ const ITEMS = [
   {
     paperType: 'notebook',
     name: 'Chemistry Practical Record',
-    sub: 'Copied 70 pages from the topper during lunch break just for one red signature.',
+    sub: 'Copied 40 pages of salt analysis from topper during lunch break.',
     stamp: 'RE-WRITE',
     hp: 3,
     pts: 280,
@@ -43,17 +43,17 @@ const ITEMS = [
   },
   {
     paperType: 'tuition',
-    name: 'Coaching Institute Test Series',
-    sub: 'Sunday 6 AM mock exam. Scored 14 out of 300 in Organic Chemistry.',
-    stamp: 'RANK 482',
+    name: 'Coaching Center Mock Test',
+    sub: 'Sunday morning 3-hour test. Scored 18 out of 300 in organic chemistry.',
+    stamp: 'RANK 842',
     hp: 3,
     pts: 320,
     doodle: 'calculator'
   },
   {
     paperType: 'sticky',
-    name: 'Diary Note for Parents',
-    sub: 'Teacher: "Your child was found staring out the classroom window during Calculus."',
+    name: 'School Diary Remark',
+    sub: 'Teacher signed in red ink: "Failed to bring maths textbook for 3rd time."',
     stamp: 'SIGN HERE',
     hp: 2,
     pts: 220,
@@ -62,7 +62,7 @@ const ITEMS = [
   {
     paperType: 'syllabus',
     name: 'Maths Sample Question Paper',
-    sub: 'Problem 1: "Find x". I can not even find the motivation to turn page 2.',
+    sub: 'Integration by parts. 3 pages of rough work, zero final answer.',
     stamp: 'UNSOLVED',
     hp: 3,
     pts: 260,
@@ -70,9 +70,9 @@ const ITEMS = [
   },
   {
     paperType: 'sticky',
-    name: 'Surprise Morning Unit Test',
-    sub: '"Close all notebooks and keep bags outside. 20 algebra questions in 15 minutes."',
-    stamp: 'POP QUIZ',
+    name: 'Surprise Unit Test',
+    sub: 'Close books and keep bags outside. 10 questions in 15 minutes.',
+    stamp: 'SURPRISE TEST',
     hp: 2,
     pts: 240,
     type: 'deadline',
@@ -81,8 +81,8 @@ const ITEMS = [
   },
   {
     paperType: 'notebook',
-    name: 'Biology Diagram Homework',
-    sub: 'Spent 3 hours drawing human heart with gel pen. Teacher wrote "Untidy" across page.',
+    name: 'Biology Diagram Assignment',
+    sub: 'Spent 2 hours drawing human eye with gel pen. Teacher wrote "Untidy".',
     stamp: 'RE-DRAW',
     hp: 2,
     pts: 180,
@@ -91,35 +91,35 @@ const ITEMS = [
   {
     paperType: 'exam',
     name: 'Pre-Board Result Sheet',
-    sub: 'Passed English, failed Physics and Maths. Currently hiding paper under mattress.',
-    stamp: 'DETENTION',
+    sub: 'Physics: 19/70. Maths: 22/80. Need parent signature before tomorrow.',
+    stamp: 'FAIL',
     hp: 3,
     pts: 350,
     doodle: 'alert'
   },
   {
     paperType: 'tuition',
-    name: 'Tuition Center Homework Sheet',
-    sub: '60 trigonometry proofs due by 5 PM. Brain currently operating at 2% capacity.',
-    stamp: 'OVERDUE',
+    name: 'Tuition Homework Sheet',
+    sub: '50 trigonometry problems due before 5 PM class.',
+    stamp: 'DUE TODAY',
     hp: 3,
     pts: 300,
     doodle: 'calculator'
   },
   {
     paperType: 'syllabus',
-    name: 'Science Exhibition Project Model',
-    sub: 'Volcano model made at 3 AM using cardboard, baking soda, and red watercolor.',
-    stamp: 'COLLAPSED',
+    name: 'Physics Investigatory Project',
+    sub: 'Full-wave rectifier model made with cardboard. Circuit does not turn on.',
+    stamp: 'REJECTED',
     hp: 4,
     pts: 400,
     doodle: 'alert'
   },
   {
     paperType: 'sticky',
-    name: 'Class Topper: "I Did Not Study"',
-    sub: 'Claims they slept all night without opening book, then scores 99 out of 100.',
-    stamp: '99 / 100',
+    name: 'Class Topper Notes',
+    sub: 'Claimed they never opened the book, then scored 98 out of 100.',
+    stamp: '98 / 100',
     hp: 3,
     pts: 320,
     type: 'dodger',
@@ -131,7 +131,7 @@ const BOSSES = [
   {
     paperType: 'exam',
     name: 'SURPRISE UNIT TEST',
-    sub: 'No formula sheets allowed. 15 questions in 30 minutes. Solve now.',
+    sub: '15 questions in 20 minutes. Blank answer sheet.',
     stamp: 'TIME UP',
     hp: 18,
     pts: 1500,
@@ -140,8 +140,8 @@ const BOSSES = [
   {
     paperType: 'sticky',
     name: 'THE STRICT PRINCIPAL',
-    sub: 'Walking slowly down the corridor with hands behind back, looking into class.',
-    stamp: 'DETENTION',
+    sub: 'Walking down the corridor checking every classroom.',
+    stamp: 'SUSPENDED',
     hp: 24,
     pts: 2400,
     wave: 2
@@ -149,8 +149,8 @@ const BOSSES = [
   {
     paperType: 'tuition',
     name: 'PARENT-TEACHER MEETING (PTM)',
-    sub: '"Your child has good potential, but gets distracted and talks constantly in class."',
-    stamp: 'COMPLAINT',
+    sub: 'Teachers discussing your marks with your parents right now.',
+    stamp: 'REMARKS',
     hp: 32,
     pts: 3400,
     wave: 3
@@ -158,7 +158,7 @@ const BOSSES = [
   {
     paperType: 'syllabus',
     name: 'THE PRE-BOARD EXAMS',
-    sub: 'Strict external invigilator tapping pen on desk every 5 seconds.',
+    sub: 'External examiner checking roll numbers at the door.',
     stamp: 'FAILED',
     hp: 40,
     pts: 4500,
@@ -167,7 +167,7 @@ const BOSSES = [
   {
     paperType: 'exam',
     name: '12TH BOARD FINAL EXAM',
-    sub: 'Rolled-up admit card, barcode stickers, seal broken. Answer everything.',
+    sub: 'Admit card verified. 3 hours on the clock. Finish the paper.',
     stamp: 'BOARD EXAM',
     hp: 55,
     pts: 6000,
@@ -177,12 +177,12 @@ const BOSSES = [
 
 const RANKS = [
   [0, 'Backbencher'],
-  [300, 'Average Student'],
-  [800, 'Crammer'],
-  [1600, 'Coaching Survivor'],
-  [3000, 'Honor Roll Contender'],
-  [5000, 'Class Topper'],
-  [8000, 'Board Exam Legend']
+  [300, 'Just Passing (33%)'],
+  [800, 'Average Scorer'],
+  [1600, 'First Division'],
+  [3000, 'Class Topper'],
+  [5000, 'School Ranker'],
+  [8000, 'State Rank 1']
 ];
 
 const WORDS = ['SMASHED!', 'CRUSHED!', 'CANCELLED!', 'PASSED!', 'NO HOMEWORK!', 'ACE!', 'BOOM!', 'FREEDOM!'];

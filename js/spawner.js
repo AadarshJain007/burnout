@@ -160,8 +160,8 @@ function spawnPowerupDrop(x, y) {
   const arenaEl = $('arena');
   const types = [
     { type: 'bomb', iconHtml: '<svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="14" cy="18" r="9"/><path d="M20 11l3-3"/></svg>', label: '+2 BOMBS' },
-    { type: 'energy', iconHtml: '<svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 12 L10 26 L22 26 L24 12 Z" fill="#fed7aa"/><line x1="7" y1="12" x2="25" y2="12"/></svg>', label: 'ENERGY BOOST!' },
-    { type: 'clean', iconHtml: '<svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 24 L26 4 L28 6 L8 26 Z" fill="#bbf7d0"/><path d="M6 24 L3 29 L8 26 Z"/></svg>', label: 'DESK CLEANED! (-2 PAPERS)' },
+    { type: 'energy', iconHtml: '<svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 12 L10 26 L22 26 L24 12 Z" fill="#fed7aa"/><line x1="7" y1="12" x2="25" y2="12"/></svg>', label: 'SPEED BOOST!' },
+    { type: 'clean', iconHtml: '<svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 24 L26 4 L28 6 L8 26 Z" fill="#bbf7d0"/><path d="M6 24 L3 29 L8 26 Z"/></svg>', label: 'TORN UP (-2)!' },
     { type: 'wipe', iconHtml: '<svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="#dc2626" stroke-width="2.6"><line x1="8" y1="8" x2="24" y2="24"/><line x1="24" y1="8" x2="8" y2="24"/></svg>', label: 'SCHOOL HOLIDAY!' }
   ];
   const item = types[Math.floor(Math.random() * types.length)];

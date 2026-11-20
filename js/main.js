@@ -49,8 +49,8 @@ function startWave(num) {
   const waveDescs = [
     'SURPRISE UNIT TESTS',
     'HALF-YEARLY EXAMS',
-    'PRACTICAL LAB EXAMS',
-    'PRE-BOARD MARATHON',
+    'PRACTICAL EXAMS',
+    'PRE-BOARD EXAMS',
     '12TH BOARD EXAMS'
   ];
   const title = waveTitles[num - 1] || `TERM ${num}`;
@@ -80,7 +80,7 @@ function triggerBossEncounter() {
 
   const banner = $('wave-announcer');
   if (banner) {
-    $('wa-title').textContent = 'TEACHER INCOMING!';
+    $('wa-title').textContent = 'EXAM ALERT!';
     $('wa-desc').textContent = bossData.name;
     banner.classList.add('active');
     setTimeout(() => banner.classList.remove('active'), 2000);
@@ -106,7 +106,7 @@ function handleBossDefeat() {
 function triggerVictoryScreen() {
   State.running = false;
   $('gameover-modal').classList.add('open');
-  $('go-title').innerHTML = 'EXAMS CLEARED! <span>GRADUATED 12TH</span>';
+  $('go-title').innerHTML = 'BOARDS CLEARED! <span>PASSED 12TH</span>';
   
   const goStamp = $('go-stamp');
   if (goStamp) {
@@ -127,11 +127,11 @@ function triggerGameOver(reasonTitle) {
   clearInterval(State.tickInterval);
 
   $('gameover-modal').classList.add('open');
-  $('go-title').innerHTML = `${reasonTitle || 'FAILED!'} <span>DETENTION</span>`;
+  $('go-title').innerHTML = `${reasonTitle || 'FAILED!'} <span>REPEAT YEAR</span>`;
   
   const goStamp = $('go-stamp');
   if (goStamp) {
-    goStamp.textContent = 'REPEAT';
+    goStamp.textContent = 'FAIL';
     goStamp.className = 'folder-stamp-red';
   }
 

@@ -48,7 +48,7 @@ function updateComboDisplay(combo) {
   if (!hud || !textEl) return;
   
   if (combo >= 2) {
-    const titles = ['COMBO', 'CRUNCH!', 'POWER SMASH!', 'MAX COMBO!', 'TOPPER LEVEL!'];
+    const titles = ['COMBO', 'CRUNCH!', 'GREAT!', 'SUPER!', 'TOPPER!'];
     const label = titles[Math.min(titles.length - 1, Math.floor((combo - 2) / 2))];
     textEl.textContent = `${label} x${combo}`;
     hud.classList.add('active');

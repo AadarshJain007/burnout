@@ -1,22 +1,24 @@
-# BURNOUT 🐀
+# BURNOUT
 
-An authentic indie arcade browser game where you smash the pressures of student life — finals, surprise quizzes, tuition bills, GPA drops, and mandatory attendance.
+A study desk smash game for 12th standard students.
+
+Smash board exam papers, practical records, coaching mock tests, and surprise unit tests before your desk overflows.
 
 **Play Live:** https://aadarshjain007.github.io/burnout/
 
 ## Controls
 
-- **1**: 🔨 Hammer (fast single-target hits)
-- **2**: 🏏 Bat (knockback collisions)
-- **3**: 💣 Bomb (area explosion)
-- **P / Esc**: ⏸ Pause
-- **R**: 🔄 Restart
+- **1**: Hammer (single hit)
+- **2**: Cricket Bat (knockback)
+- **3**: Bomb (clears area)
+- **P / Esc**: Pause
+- **R**: Restart
 
-## Stack
+## Built With
 
 - HTML5 / CSS3 / Vanilla JavaScript
-- Web Audio API (procedural SFX)
+- Web Audio API
 
 ---
 
-**Made by Aadarsh Jain**
+Made by Aadarsh Jain
